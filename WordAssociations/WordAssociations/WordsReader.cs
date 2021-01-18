@@ -10,7 +10,7 @@ namespace WordAssociations
         public static ArrayList ReadWords()
         {
             string[] words;
-            const string filePath = "/Resources/Words.txt";
+            const string filePath = "Resources/Words.txt";
             if (File.Exists(filePath))
             {
                 words = File.ReadAllLines(filePath);

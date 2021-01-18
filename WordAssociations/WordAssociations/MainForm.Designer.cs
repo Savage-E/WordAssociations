@@ -81,6 +81,7 @@ namespace WordAssociations
             this.addAssocTextBox.Name = "addAssocTextBox";
             this.addAssocTextBox.Size = new System.Drawing.Size(140, 20);
             this.addAssocTextBox.TabIndex = 6;
+            this.addAssocTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.addAssocTextBox_KeyDown);
             // 
             // testeeGroupBox
             // 

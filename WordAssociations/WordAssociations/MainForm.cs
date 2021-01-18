@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -7,14 +8,20 @@ namespace WordAssociations
 {
     public partial class MainForm : Form
     {
-        private String[] testeeData;
+        private string[] testeeData;
         private ArrayList wordsList;
+        private List<string> associationsList;
+        private int count;
+        private int amount;
 
         public MainForm()
         {
             InitializeComponent();
-            testeeData = new String[4];
+            testeeData = new string[4];
             wordsList = LoadWords();
+            associationsList = new List<string>();
+            count = 0;
+            amount = wordsList.Count;
         }
 
         private static ArrayList LoadWords()
@@ -39,8 +46,15 @@ namespace WordAssociations
             {
                 MessageBox.Show("Введите данные испытуемого!");
             }
+            else if (wordsList.Count == 0)
+            {
+                MessageBox.Show("Невозможно продолжить, т.к. отсутствуют слова в списке слов");
+            }
             else
             {
+                wordCountLabel.Visible = true;
+                wordCountLabel.Text = "Слово : " + count++ + " из " + amount;
+                outputWordTextBox.Text = UpdateLabel().ToString();
             }
         }
 
@@ -59,6 +73,27 @@ namespace WordAssociations
                 testeeData[3] = ageNumericUpDown.Text;
                 testeeLabel.Visible = true;
                 testeeLabel.Text += testeeData[0] + " " + testeeData[1] + " " + testeeData[2] + " " + testeeData[3];
+            }
+        }
+
+        private void addAssocTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (addAssocTextBox.Text != "")
+                {
+                    associationsList.Add(addAssocTextBox.Text);
+                }
+                wordCountLabel.Text = "Слово : " + count++ + " из " + amount;
+                outputWordTextBox.Text=UpdateLabel().ToString();
+            }
+        }
+
+        private IEnumerator UpdateLabel()
+        {
+            foreach (string w in wordsList)
+            {
+                yield return w;
             }
         }
     }
