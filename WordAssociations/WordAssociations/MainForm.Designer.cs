@@ -35,12 +35,13 @@ namespace WordAssociations
             this.outputWordTextBox = new System.Windows.Forms.TextBox();
             this.associationLabel = new System.Windows.Forms.Label();
             this.addAssocTextBox = new System.Windows.Forms.TextBox();
-            this.userGroupBox = new System.Windows.Forms.GroupBox();
+            this.testeeGroupBox = new System.Windows.Forms.GroupBox();
+            this.ageNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.testeeLabel = new System.Windows.Forms.Label();
             this.ageLabel = new System.Windows.Forms.Label();
             this.patronymicLabel = new System.Windows.Forms.Label();
             this.lastNameLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
-            this.ageTextBox = new System.Windows.Forms.TextBox();
             this.patronymicTextBox = new System.Windows.Forms.TextBox();
             this.lastNameTextBox = new System.Windows.Forms.TextBox();
             this.firstNameTextBox = new System.Windows.Forms.TextBox();
@@ -49,7 +50,8 @@ namespace WordAssociations
             this.stopButton = new System.Windows.Forms.Button();
             this.wordCountLabel = new System.Windows.Forms.Label();
             this.configureWordsButton = new System.Windows.Forms.Button();
-            this.userGroupBox.SuspendLayout();
+            this.testeeGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.ageNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // outputWordTextBox
@@ -80,24 +82,40 @@ namespace WordAssociations
             this.addAssocTextBox.Size = new System.Drawing.Size(140, 20);
             this.addAssocTextBox.TabIndex = 6;
             // 
-            // userGroupBox
+            // testeeGroupBox
             // 
-            this.userGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.userGroupBox.Controls.Add(this.ageLabel);
-            this.userGroupBox.Controls.Add(this.patronymicLabel);
-            this.userGroupBox.Controls.Add(this.lastNameLabel);
-            this.userGroupBox.Controls.Add(this.nameLabel);
-            this.userGroupBox.Controls.Add(this.ageTextBox);
-            this.userGroupBox.Controls.Add(this.patronymicTextBox);
-            this.userGroupBox.Controls.Add(this.lastNameTextBox);
-            this.userGroupBox.Controls.Add(this.firstNameTextBox);
-            this.userGroupBox.Controls.Add(this.addTesteeButton);
-            this.userGroupBox.Location = new System.Drawing.Point(373, 12);
-            this.userGroupBox.Name = "userGroupBox";
-            this.userGroupBox.Size = new System.Drawing.Size(194, 229);
-            this.userGroupBox.TabIndex = 8;
-            this.userGroupBox.TabStop = false;
-            this.userGroupBox.Text = "Данные испытуемого";
+            this.testeeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.testeeGroupBox.Controls.Add(this.ageNumericUpDown);
+            this.testeeGroupBox.Controls.Add(this.testeeLabel);
+            this.testeeGroupBox.Controls.Add(this.ageLabel);
+            this.testeeGroupBox.Controls.Add(this.patronymicLabel);
+            this.testeeGroupBox.Controls.Add(this.lastNameLabel);
+            this.testeeGroupBox.Controls.Add(this.nameLabel);
+            this.testeeGroupBox.Controls.Add(this.patronymicTextBox);
+            this.testeeGroupBox.Controls.Add(this.lastNameTextBox);
+            this.testeeGroupBox.Controls.Add(this.firstNameTextBox);
+            this.testeeGroupBox.Controls.Add(this.addTesteeButton);
+            this.testeeGroupBox.Location = new System.Drawing.Point(373, 12);
+            this.testeeGroupBox.Name = "testeeGroupBox";
+            this.testeeGroupBox.Size = new System.Drawing.Size(194, 229);
+            this.testeeGroupBox.TabIndex = 8;
+            this.testeeGroupBox.TabStop = false;
+            this.testeeGroupBox.Text = "Данные испытуемого";
+            // 
+            // ageNumericUpDown
+            // 
+            this.ageNumericUpDown.Location = new System.Drawing.Point(107, 163);
+            this.ageNumericUpDown.Name = "ageNumericUpDown";
+            this.ageNumericUpDown.Size = new System.Drawing.Size(74, 20);
+            this.ageNumericUpDown.TabIndex = 10;
+            // 
+            // testeeLabel
+            // 
+            this.testeeLabel.Location = new System.Drawing.Point(15, 28);
+            this.testeeLabel.Name = "testeeLabel";
+            this.testeeLabel.Size = new System.Drawing.Size(143, 33);
+            this.testeeLabel.TabIndex = 9;
+            this.testeeLabel.Visible = false;
             // 
             // ageLabel
             // 
@@ -131,13 +149,6 @@ namespace WordAssociations
             this.nameLabel.TabIndex = 5;
             this.nameLabel.Text = "Имя";
             // 
-            // ageTextBox
-            // 
-            this.ageTextBox.Location = new System.Drawing.Point(108, 158);
-            this.ageTextBox.Name = "ageTextBox";
-            this.ageTextBox.Size = new System.Drawing.Size(80, 20);
-            this.ageTextBox.TabIndex = 4;
-            // 
             // patronymicTextBox
             // 
             this.patronymicTextBox.Location = new System.Drawing.Point(6, 158);
@@ -167,6 +178,7 @@ namespace WordAssociations
             this.addTesteeButton.TabIndex = 0;
             this.addTesteeButton.Text = "Добавить испытуемого";
             this.addTesteeButton.UseVisualStyleBackColor = true;
+            this.addTesteeButton.Click += new System.EventHandler(this.addTesteeButton_Click);
             // 
             // startButton
             // 
@@ -214,18 +226,23 @@ namespace WordAssociations
             this.Controls.Add(this.wordCountLabel);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.startButton);
-            this.Controls.Add(this.userGroupBox);
+            this.Controls.Add(this.testeeGroupBox);
             this.Controls.Add(this.addAssocTextBox);
             this.Controls.Add(this.associationLabel);
             this.Controls.Add(this.outputWordTextBox);
             this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Word Associations";
-            this.userGroupBox.ResumeLayout(false);
-            this.userGroupBox.PerformLayout();
+            this.testeeGroupBox.ResumeLayout(false);
+            this.testeeGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.ageNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.NumericUpDown ageNumericUpDown;
+
+        private System.Windows.Forms.Label testeeLabel;
 
         private System.Windows.Forms.Button configureWordsButton;
 
@@ -242,10 +259,9 @@ namespace WordAssociations
         private System.Windows.Forms.TextBox firstNameTextBox;
         private System.Windows.Forms.TextBox lastNameTextBox;
         private System.Windows.Forms.TextBox patronymicTextBox;
-        private System.Windows.Forms.TextBox ageTextBox;
 
         private System.Windows.Forms.Button addTesteeButton;
-        private System.Windows.Forms.GroupBox userGroupBox;
+        private System.Windows.Forms.GroupBox testeeGroupBox;
 
         private System.Windows.Forms.TextBox addAssocTextBox;
 
