@@ -82,6 +82,9 @@
         <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Resources\Records\ц.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
       <Content Include="Resources\Words.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>

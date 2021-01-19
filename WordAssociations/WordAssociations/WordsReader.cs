@@ -7,7 +7,7 @@ namespace WordAssociations
 {
     public static class WordsReader
     {
-        public static ArrayList ReadWords()
+        public static string [] ReadWords()
         {
             string[] words;
             const string filePath = "Resources/Words.txt";
@@ -20,7 +20,7 @@ namespace WordAssociations
                 throw new FileNotFoundException();
             }
             
-            return new ArrayList {words.ToArray()};
+            return words;
         }
     }
 }

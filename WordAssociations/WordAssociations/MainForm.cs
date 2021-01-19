@@ -9,24 +9,26 @@ namespace WordAssociations
     public partial class MainForm : Form
     {
         private string[] testeeData;
-        private ArrayList wordsList;
+        private string[] wordsList;
         private List<string> associationsList;
         private int count;
         private int amount;
+        private bool isStarted;
 
         public MainForm()
         {
             InitializeComponent();
             testeeData = new string[4];
-            wordsList = LoadWords();
+            wordsList = InitWords();
             associationsList = new List<string>();
-            count = 0;
-            amount = wordsList.Count;
+            count = 1;
+            amount = wordsList.Length;
+            isStarted = false;
         }
 
-        private static ArrayList LoadWords()
+        private static string[] InitWords()
         {
-            ArrayList tempWordsList = new ArrayList();
+            string[] tempWordsList = null;
 
             try
             {
@@ -46,15 +48,17 @@ namespace WordAssociations
             {
                 MessageBox.Show("Введите данные испытуемого!");
             }
-            else if (wordsList.Count == 0)
+            else if (wordsList.Length == 0)
             {
                 MessageBox.Show("Невозможно продолжить, т.к. отсутствуют слова в списке слов");
             }
             else
             {
+                isStarted = true;
                 wordCountLabel.Visible = true;
-                wordCountLabel.Text = "Слово : " + count++ + " из " + amount;
-                outputWordTextBox.Text = UpdateLabel().ToString();
+                outputWordTextBox.Text = UpdateLabel();
+                wordCountLabel.Text = "Слово : " + count + " из " + amount;
+                
             }
         }
 
@@ -72,29 +76,38 @@ namespace WordAssociations
                 testeeData[2] = patronymicTextBox.Text;
                 testeeData[3] = ageNumericUpDown.Text;
                 testeeLabel.Visible = true;
-                testeeLabel.Text += testeeData[0] + " " + testeeData[1] + " " + testeeData[2] + " " + testeeData[3];
+                testeeLabel.Text += testeeData[0] + " " + testeeData[1] +
+                                    " " + testeeData[2] + " " + testeeData[3];
             }
         }
 
         private void addAssocTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter && isStarted == true)
             {
-                if (addAssocTextBox.Text != "")
+                if (count == amount+1)
+                {
+                    isStarted = false;
+                    WordsLoader.LoadWords(testeeData, associationsList);
+                    
+                }
+                else if (addAssocTextBox.Text != "")
                 {
                     associationsList.Add(addAssocTextBox.Text);
+                    count++;
+                    outputWordTextBox.Text = UpdateLabel();
+                    wordCountLabel.Text = "Слово : " + count + " из " + amount;
+                    
                 }
-                wordCountLabel.Text = "Слово : " + count++ + " из " + amount;
-                outputWordTextBox.Text=UpdateLabel().ToString();
+
+                
             }
         }
 
-        private IEnumerator UpdateLabel()
-        {
-            foreach (string w in wordsList)
-            {
-                yield return w;
-            }
+        private string UpdateLabel()
+        {   
+            
+            return wordsList[count-1];
         }
     }
 }
