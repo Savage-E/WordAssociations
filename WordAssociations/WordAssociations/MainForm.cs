@@ -14,6 +14,7 @@ namespace WordAssociations
         private int count;
         private int amount;
         private bool isStarted;
+        private ChildForm childForm;
 
         public MainForm()
         {
@@ -87,7 +88,7 @@ namespace WordAssociations
                 }
 
                 testeeLabel.Text += testeeData[1] + " " + testeeData[0] +
-                                    " " + testeeData[2] + " " + testeeData[3] + "лет";
+                                    " " + testeeData[2] + " " + testeeData[3] + " лет";
             }
         }
 
@@ -95,6 +96,7 @@ namespace WordAssociations
         {
             if (e.KeyCode == Keys.Enter && isStarted == true)
             {
+                e.SuppressKeyPress = true;
                 if (addAssocTextBox.Text != "")
                 {
                     associationsList.Add(addAssocTextBox.Text.Trim());
@@ -139,6 +141,12 @@ namespace WordAssociations
                     Restore();
                 }
             }
+        }
+
+        private void configureWordsButton_Click(object sender, EventArgs e)
+        {
+            childForm = new ChildForm();
+            childForm.Show();
         }
     }
 }

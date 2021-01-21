@@ -212,12 +212,14 @@ namespace WordAssociations
             // 
             // configureWordsButton
             // 
+            this.configureWordsButton.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.configureWordsButton.Location = new System.Drawing.Point(429, 398);
             this.configureWordsButton.Name = "configureWordsButton";
             this.configureWordsButton.Size = new System.Drawing.Size(138, 40);
             this.configureWordsButton.TabIndex = 12;
             this.configureWordsButton.Text = "Настроить список доступных слов";
             this.configureWordsButton.UseVisualStyleBackColor = true;
+            this.configureWordsButton.Click += new System.EventHandler(this.configureWordsButton_Click);
             // 
             // MainForm
             // 
@@ -233,6 +235,7 @@ namespace WordAssociations
             this.Controls.Add(this.associationLabel);
             this.Controls.Add(this.outputWordTextBox);
             this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(595, 489);
             this.Name = "MainForm";
             this.Text = "Word Associations";
             this.testeeGroupBox.ResumeLayout(false);

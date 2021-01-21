@@ -20,7 +20,7 @@ namespace WordAssociations
 
                 foreach (string data in associationsList)
                 {
-                    sw.WriteLine(count+"."+wordsList[count++]);
+                    sw.WriteLine(count + "." + wordsList[count++]);
                     sw.WriteLine(data);
                 }
             }
