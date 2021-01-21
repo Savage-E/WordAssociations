@@ -52,13 +52,17 @@ namespace WordAssociations
             {
                 MessageBox.Show("Невозможно продолжить, т.к. отсутствуют слова в списке слов");
             }
+
+            else if (isStarted == true)
+            {
+                MessageBox.Show("Тест уже запущен!");
+            }
             else
             {
                 isStarted = true;
                 wordCountLabel.Visible = true;
                 outputWordTextBox.Text = UpdateLabel();
                 wordCountLabel.Text = "Слово : " + count + " из " + amount;
-                
             }
         }
 
@@ -69,15 +73,21 @@ namespace WordAssociations
             {
                 MessageBox.Show("Введите Имя, Фамилию, Отчество(если имеется) и возраст!");
             }
+
             else
             {
-                testeeData[0] = firstNameTextBox.Text;
-                testeeData[1] = lastNameTextBox.Text;
-                testeeData[2] = patronymicTextBox.Text;
-                testeeData[3] = ageNumericUpDown.Text;
+                testeeData[0] = firstNameTextBox.Text.Trim();
+                testeeData[1] = lastNameTextBox.Text.Trim();
+                testeeData[2] = patronymicTextBox.Text.Trim();
+                testeeData[3] = ageNumericUpDown.Text.Trim();
                 testeeLabel.Visible = true;
-                testeeLabel.Text += testeeData[0] + " " + testeeData[1] +
-                                    " " + testeeData[2] + " " + testeeData[3];
+                if (testeeLabel.Text != "")
+                {
+                    testeeLabel.Text = "";
+                }
+
+                testeeLabel.Text += testeeData[1] + " " + testeeData[0] +
+                                    " " + testeeData[2] + " " + testeeData[3] + "лет";
             }
         }
 
@@ -85,29 +95,50 @@ namespace WordAssociations
         {
             if (e.KeyCode == Keys.Enter && isStarted == true)
             {
-                if (count == amount+1)
+                if (addAssocTextBox.Text != "")
                 {
-                    isStarted = false;
-                    WordsLoader.LoadWords(testeeData, associationsList);
-                    
-                }
-                else if (addAssocTextBox.Text != "")
-                {
-                    associationsList.Add(addAssocTextBox.Text);
+                    associationsList.Add(addAssocTextBox.Text.Trim());
                     count++;
+                    if (count == amount + 1)
+                    {
+                        WordsLoader.LoadWords(testeeData, associationsList, wordsList);
+                        Restore();
+                        return;
+                    }
+
                     outputWordTextBox.Text = UpdateLabel();
                     wordCountLabel.Text = "Слово : " + count + " из " + amount;
-                    
                 }
-
-                
             }
         }
 
+        private void Restore()
+        {
+            isStarted = false;
+            outputWordTextBox.Text = "";
+            wordCountLabel.Text = "";
+            wordCountLabel.Visible = false;
+            associationsList = new List<string>();
+            count = 1;
+        }
+
         private string UpdateLabel()
-        {   
-            
-            return wordsList[count-1];
+        {
+            return wordsList[count - 1];
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            if (isStarted == true)
+            {
+                DialogResult dr =
+                    MessageBox.Show("Вы уверены, что хотите завершить тест?\nРезультаты теста не будут сохранены.",
+                        "Внимание!", MessageBoxButtons.OKCancel);
+                if (dr == DialogResult.OK)
+                {
+                    Restore();
+                }
+            }
         }
     }
 }

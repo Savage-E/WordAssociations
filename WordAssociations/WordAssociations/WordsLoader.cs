@@ -7,12 +7,10 @@ namespace WordAssociations
 {
     public static class WordsLoader
     {
-        public static bool LoadWords(string[] testeeData, List<string> associationsList)
+        public static void LoadWords(string[] testeeData, List<string> associationsList, string[] wordsList)
         {
-            bool result = false;
-            
-            string filePath="Resources/Recods/Record" +" "+DateTime.Now.ToFileTime() +".txt";
-            
+            string filePath = "Resources/Records/Record" + " " + DateTime.Now.ToFileTime() + ".txt";
+            int count = 0;
             using (StreamWriter sw = new StreamWriter(filePath, false, System.Text.Encoding.Default))
             {
                 foreach (string data in testeeData)
@@ -22,13 +20,10 @@ namespace WordAssociations
 
                 foreach (string data in associationsList)
                 {
+                    sw.WriteLine(count+"."+wordsList[count++]);
                     sw.WriteLine(data);
                 }
-
-                result = true;
             }
-
-            return result;
         }
     }
 }

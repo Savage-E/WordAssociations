@@ -199,6 +199,7 @@ namespace WordAssociations
             this.stopButton.TabIndex = 10;
             this.stopButton.Text = "Завершить";
             this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // wordCountLabel
             // 
