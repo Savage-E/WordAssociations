@@ -9,7 +9,7 @@ namespace WordAssociations
     {
         public static void LoadWords(string[] testeeData, List<string> associationsList)
         {
-            string filePath = "Resources/Records/Record" + " " + DateTime.Now.ToShortDateString() + ".txt";
+            string filePath = "Resources/Records/Record" + " " + DateTime.Now.ToFileTimeUtc() + ".txt";
 
             using (StreamWriter sw = new StreamWriter(filePath, false, System.Text.Encoding.Default))
             {
