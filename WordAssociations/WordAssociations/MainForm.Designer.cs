@@ -36,6 +36,8 @@ namespace WordAssociations
             this.associationLabel = new System.Windows.Forms.Label();
             this.addAssocTextBox = new System.Windows.Forms.TextBox();
             this.testeeGroupBox = new System.Windows.Forms.GroupBox();
+            this.genderComboBox = new System.Windows.Forms.ComboBox();
+            this.genderLabel = new System.Windows.Forms.Label();
             this.ageNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.testeeLabel = new System.Windows.Forms.Label();
             this.ageLabel = new System.Windows.Forms.Label();
@@ -48,10 +50,12 @@ namespace WordAssociations
             this.addTesteeButton = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
-            this.wordCountLabel = new System.Windows.Forms.Label();
-            this.configureWordsButton = new System.Windows.Forms.Button();
+            this.workOptionGroupBox = new System.Windows.Forms.GroupBox();
+            this.singleOprtionRadioButton = new System.Windows.Forms.RadioButton();
+            this.chainOptionRadioButton = new System.Windows.Forms.RadioButton();
             this.testeeGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.ageNumericUpDown)).BeginInit();
+            this.workOptionGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // outputWordTextBox
@@ -86,6 +90,8 @@ namespace WordAssociations
             // testeeGroupBox
             // 
             this.testeeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.testeeGroupBox.Controls.Add(this.genderComboBox);
+            this.testeeGroupBox.Controls.Add(this.genderLabel);
             this.testeeGroupBox.Controls.Add(this.ageNumericUpDown);
             this.testeeGroupBox.Controls.Add(this.testeeLabel);
             this.testeeGroupBox.Controls.Add(this.ageLabel);
@@ -96,33 +102,50 @@ namespace WordAssociations
             this.testeeGroupBox.Controls.Add(this.lastNameTextBox);
             this.testeeGroupBox.Controls.Add(this.firstNameTextBox);
             this.testeeGroupBox.Controls.Add(this.addTesteeButton);
-            this.testeeGroupBox.Location = new System.Drawing.Point(373, 12);
+            this.testeeGroupBox.Location = new System.Drawing.Point(328, 12);
             this.testeeGroupBox.Name = "testeeGroupBox";
-            this.testeeGroupBox.Size = new System.Drawing.Size(194, 229);
+            this.testeeGroupBox.Size = new System.Drawing.Size(239, 229);
             this.testeeGroupBox.TabIndex = 8;
             this.testeeGroupBox.TabStop = false;
             this.testeeGroupBox.Text = "Данные испытуемого";
             // 
+            // genderComboBox
+            // 
+            this.genderComboBox.FormattingEnabled = true;
+            this.genderComboBox.Items.AddRange(new object[] {"Мужской", "Женский"});
+            this.genderComboBox.Location = new System.Drawing.Point(127, 157);
+            this.genderComboBox.Name = "genderComboBox";
+            this.genderComboBox.Size = new System.Drawing.Size(97, 21);
+            this.genderComboBox.TabIndex = 14;
+            // 
+            // genderLabel
+            // 
+            this.genderLabel.Location = new System.Drawing.Point(127, 138);
+            this.genderLabel.Name = "genderLabel";
+            this.genderLabel.Size = new System.Drawing.Size(69, 16);
+            this.genderLabel.TabIndex = 11;
+            this.genderLabel.Text = "Пол";
+            // 
             // ageNumericUpDown
             // 
-            this.ageNumericUpDown.Location = new System.Drawing.Point(107, 163);
+            this.ageNumericUpDown.Location = new System.Drawing.Point(187, 104);
             this.ageNumericUpDown.Name = "ageNumericUpDown";
-            this.ageNumericUpDown.Size = new System.Drawing.Size(74, 20);
+            this.ageNumericUpDown.Size = new System.Drawing.Size(47, 20);
             this.ageNumericUpDown.TabIndex = 10;
             // 
             // testeeLabel
             // 
             this.testeeLabel.Location = new System.Drawing.Point(15, 28);
             this.testeeLabel.Name = "testeeLabel";
-            this.testeeLabel.Size = new System.Drawing.Size(143, 33);
+            this.testeeLabel.Size = new System.Drawing.Size(143, 46);
             this.testeeLabel.TabIndex = 9;
             this.testeeLabel.Visible = false;
             // 
             // ageLabel
             // 
-            this.ageLabel.Location = new System.Drawing.Point(108, 139);
+            this.ageLabel.Location = new System.Drawing.Point(184, 85);
             this.ageLabel.Name = "ageLabel";
-            this.ageLabel.Size = new System.Drawing.Size(74, 16);
+            this.ageLabel.Size = new System.Drawing.Size(55, 16);
             this.ageLabel.TabIndex = 8;
             this.ageLabel.Text = "Возраст";
             // 
@@ -154,12 +177,12 @@ namespace WordAssociations
             // 
             this.patronymicTextBox.Location = new System.Drawing.Point(6, 158);
             this.patronymicTextBox.Name = "patronymicTextBox";
-            this.patronymicTextBox.Size = new System.Drawing.Size(80, 20);
+            this.patronymicTextBox.Size = new System.Drawing.Size(101, 20);
             this.patronymicTextBox.TabIndex = 3;
             // 
             // lastNameTextBox
             // 
-            this.lastNameTextBox.Location = new System.Drawing.Point(108, 103);
+            this.lastNameTextBox.Location = new System.Drawing.Point(101, 103);
             this.lastNameTextBox.Name = "lastNameTextBox";
             this.lastNameTextBox.Size = new System.Drawing.Size(80, 20);
             this.lastNameTextBox.TabIndex = 2;
@@ -201,33 +224,43 @@ namespace WordAssociations
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
-            // wordCountLabel
+            // workOptionGroupBox
             // 
-            this.wordCountLabel.Location = new System.Drawing.Point(12, 73);
-            this.wordCountLabel.Name = "wordCountLabel";
-            this.wordCountLabel.Size = new System.Drawing.Size(96, 18);
-            this.wordCountLabel.TabIndex = 11;
-            this.wordCountLabel.Text = "Слово : ";
-            this.wordCountLabel.Visible = false;
+            this.workOptionGroupBox.Controls.Add(this.singleOprtionRadioButton);
+            this.workOptionGroupBox.Controls.Add(this.chainOptionRadioButton);
+            this.workOptionGroupBox.Location = new System.Drawing.Point(165, 12);
+            this.workOptionGroupBox.Name = "workOptionGroupBox";
+            this.workOptionGroupBox.Size = new System.Drawing.Size(157, 80);
+            this.workOptionGroupBox.TabIndex = 13;
+            this.workOptionGroupBox.TabStop = false;
+            this.workOptionGroupBox.Text = "Режим работы";
             // 
-            // configureWordsButton
+            // singleOprtionRadioButton
             // 
-            this.configureWordsButton.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.configureWordsButton.Location = new System.Drawing.Point(429, 398);
-            this.configureWordsButton.Name = "configureWordsButton";
-            this.configureWordsButton.Size = new System.Drawing.Size(138, 40);
-            this.configureWordsButton.TabIndex = 12;
-            this.configureWordsButton.Text = "Настроить список доступных слов";
-            this.configureWordsButton.UseVisualStyleBackColor = true;
-            this.configureWordsButton.Click += new System.EventHandler(this.configureWordsButton_Click);
+            this.singleOprtionRadioButton.Location = new System.Drawing.Point(13, 50);
+            this.singleOprtionRadioButton.Name = "singleOprtionRadioButton";
+            this.singleOprtionRadioButton.Size = new System.Drawing.Size(104, 24);
+            this.singleOprtionRadioButton.TabIndex = 1;
+            this.singleOprtionRadioButton.TabStop = true;
+            this.singleOprtionRadioButton.Text = "Одно слово";
+            this.singleOprtionRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // chainOptionRadioButton
+            // 
+            this.chainOptionRadioButton.Location = new System.Drawing.Point(13, 25);
+            this.chainOptionRadioButton.Name = "chainOptionRadioButton";
+            this.chainOptionRadioButton.Size = new System.Drawing.Size(138, 24);
+            this.chainOptionRadioButton.TabIndex = 0;
+            this.chainOptionRadioButton.TabStop = true;
+            this.chainOptionRadioButton.Text = "Цепочка ассоциаций";
+            this.chainOptionRadioButton.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 450);
-            this.Controls.Add(this.configureWordsButton);
-            this.Controls.Add(this.wordCountLabel);
+            this.ClientSize = new System.Drawing.Size(579, 367);
+            this.Controls.Add(this.workOptionGroupBox);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.testeeGroupBox);
@@ -235,23 +268,28 @@ namespace WordAssociations
             this.Controls.Add(this.associationLabel);
             this.Controls.Add(this.outputWordTextBox);
             this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(595, 489);
+            this.MinimumSize = new System.Drawing.Size(595, 406);
             this.Name = "MainForm";
             this.Text = "Word Associations";
             this.testeeGroupBox.ResumeLayout(false);
             this.testeeGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) (this.ageNumericUpDown)).EndInit();
+            this.workOptionGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.ComboBox genderComboBox;
+
+        private System.Windows.Forms.Label genderLabel;
+
+        private System.Windows.Forms.RadioButton chainOptionRadioButton;
+        private System.Windows.Forms.RadioButton singleOprtionRadioButton;
+        private System.Windows.Forms.GroupBox workOptionGroupBox;
+
         private System.Windows.Forms.NumericUpDown ageNumericUpDown;
 
         private System.Windows.Forms.Label testeeLabel;
-
-        private System.Windows.Forms.Button configureWordsButton;
-
-        private System.Windows.Forms.Label wordCountLabel;
 
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Button stopButton;

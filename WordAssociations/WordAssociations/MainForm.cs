@@ -9,39 +9,19 @@ namespace WordAssociations
     public partial class MainForm : Form
     {
         private string[] testeeData;
-        private string[] wordsList;
         private List<string> associationsList;
-        private int count;
-        private int amount;
         private bool isStarted;
-        private ChildForm childForm;
+
 
         public MainForm()
         {
             InitializeComponent();
-            testeeData = new string[4];
-            wordsList = InitWords();
+            testeeData = new string[5];
+
             associationsList = new List<string>();
-            count = 1;
-            amount = wordsList.Length;
             isStarted = false;
         }
 
-        private static string[] InitWords()
-        {
-            string[] tempWordsList = null;
-
-            try
-            {
-                tempWordsList = WordsReader.ReadWords();
-            }
-            catch (FileNotFoundException e)
-            {
-                MessageBox.Show("Файл \"Words.txt \" со списком слов не найден!");
-            }
-
-            return tempWordsList;
-        }
 
         private void startButton_Click(object sender, EventArgs e)
         {
@@ -49,30 +29,31 @@ namespace WordAssociations
             {
                 MessageBox.Show("Введите данные испытуемого!");
             }
-            else if (wordsList.Length == 0)
-            {
-                MessageBox.Show("Невозможно продолжить, т.к. отсутствуют слова в списке слов");
-            }
-
             else if (isStarted == true)
             {
                 MessageBox.Show("Тест уже запущен!");
             }
+
+            else if (chainOptionRadioButton.Checked == false && singleOprtionRadioButton.Checked == false)
+            {
+                MessageBox.Show("Выберите режим работы!");
+            }
+
             else
             {
+                MessageBox.Show("Сначала введите исходное слово в первую строку");
                 isStarted = true;
-                wordCountLabel.Visible = true;
-                outputWordTextBox.Text = UpdateLabel();
-                wordCountLabel.Text = "Слово : " + count + " из " + amount;
+                outputWordTextBox.ReadOnly = false;
             }
         }
 
 
         private void addTesteeButton_Click(object sender, EventArgs e)
         {
-            if (firstNameTextBox.Text == "" || lastNameLabel.Text == "" || ageNumericUpDown.Value == 0)
+            if (firstNameTextBox.Text == "" || lastNameLabel.Text == "" || ageNumericUpDown.Value == 0 ||
+                genderLabel.Text == "")
             {
-                MessageBox.Show("Введите Имя, Фамилию, Отчество(если имеется) и возраст!");
+                MessageBox.Show("Введите Имя, Фамилию, Отчество(если имеется), пол и возраст!");
             }
 
             else
@@ -81,6 +62,7 @@ namespace WordAssociations
                 testeeData[1] = lastNameTextBox.Text.Trim();
                 testeeData[2] = patronymicTextBox.Text.Trim();
                 testeeData[3] = ageNumericUpDown.Text.Trim();
+                testeeData[4] = genderComboBox.Text;
                 testeeLabel.Visible = true;
                 if (testeeLabel.Text != "")
                 {
@@ -88,28 +70,40 @@ namespace WordAssociations
                 }
 
                 testeeLabel.Text += testeeData[1] + " " + testeeData[0] +
-                                    " " + testeeData[2] + " " + testeeData[3] + " лет";
+                                    " " + testeeData[2] + "\nВозвраст: " + testeeData[3] + "\nПол: " + testeeData[4];
+
+                firstNameTextBox.Text = "";
+                lastNameTextBox.Text = "";
+                patronymicTextBox.Text = "";
+                ageNumericUpDown.Text = "";
+                genderComboBox.Text = "";
             }
         }
 
         private void addAssocTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && isStarted == true)
+            if (e.KeyCode == Keys.Enter && isStarted)
             {
                 e.SuppressKeyPress = true;
+                if (outputWordTextBox.Text == "")
+                {
+                    MessageBox.Show("Для начала введите исходное слово");
+                    return;
+                }
+
+
                 if (addAssocTextBox.Text != "")
                 {
                     associationsList.Add(addAssocTextBox.Text.Trim());
-                    count++;
-                    if (count == amount + 1)
+
+                    bool option = chainOptionRadioButton.Checked;
+                    if (option)
                     {
-                        WordsLoader.LoadWords(testeeData, associationsList, wordsList);
-                        Restore();
-                        return;
+                        outputWordTextBox.Text = addAssocTextBox.Text.Trim();
                     }
 
-                    outputWordTextBox.Text = UpdateLabel();
-                    wordCountLabel.Text = "Слово : " + count + " из " + amount;
+
+                    addAssocTextBox.Text = "";
                 }
             }
         }
@@ -118,35 +112,23 @@ namespace WordAssociations
         {
             isStarted = false;
             outputWordTextBox.Text = "";
-            wordCountLabel.Text = "";
-            wordCountLabel.Visible = false;
             associationsList = new List<string>();
-            count = 1;
         }
 
-        private string UpdateLabel()
-        {
-            return wordsList[count - 1];
-        }
 
         private void stopButton_Click(object sender, EventArgs e)
         {
             if (isStarted == true)
             {
                 DialogResult dr =
-                    MessageBox.Show("Вы уверены, что хотите завершить тест?\nРезультаты теста не будут сохранены.",
+                    MessageBox.Show("Вы уверены, что хотите завершить тест?",
                         "Внимание!", MessageBoxButtons.OKCancel);
                 if (dr == DialogResult.OK)
                 {
+                    WordsLoader.LoadWords(testeeData, associationsList);
                     Restore();
                 }
             }
-        }
-
-        private void configureWordsButton_Click(object sender, EventArgs e)
-        {
-            childForm = new ChildForm();
-            childForm.Show();
         }
     }
 }
