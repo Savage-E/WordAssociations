@@ -4,18 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_bg"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/ic_bg"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/btn_start"
         android:layout_width="320dp"
         android:layout_height="100dp"
-        android:text="Начать"
-        >
-
-
-    </Button>
+        android:text="Начать" />
 </LinearLayout>
