@@ -35,8 +35,8 @@ class TestActivity : AppCompatActivity() {
                     if (dataList != null) {
                         dataList.add(et_word.text.toString())
                     }
-                    et_word.text?.clear()
                 }
+                et_word.text?.clear()
             }
         }
         btn_finish.setOnClickListener() {
@@ -47,7 +47,7 @@ class TestActivity : AppCompatActivity() {
 
             builder.setPositiveButton(android.R.string.yes) { dialog, which ->
 
-                val fileWriter =  WordWriter()
+                val fileWriter = WordWriter()
                 if (dataList != null) {
                     fileWriter.write(dataList, this)
                 }
@@ -59,8 +59,11 @@ class TestActivity : AppCompatActivity() {
             }
 
             builder.setNeutralButton("Начать заново") { dialog, which ->
+
+
                 val intent = Intent(this, MainActivity::class.java)
-                val fileWriter =  WordWriter()
+                Toast.makeText(this, getFilesDir().toString(), Toast.LENGTH_SHORT).show()
+                val fileWriter = WordWriter()
                 if (dataList != null) {
                     fileWriter.write(dataList, this)
                 }

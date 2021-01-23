@@ -7,9 +7,10 @@ namespace WordAssociations
 {
     public static class WordsLoader
     {
-        public static void LoadWords(string[] testeeData, List<string> associationsList)
+        public static void LoadWords(string[] testeeData, List<string> associationsList, string option)
         {
-            string filePath = "Resources/Records/Record" + " " + DateTime.Now.ToFileTimeUtc() + ".txt";
+            string strOption = option == "1" ? "chain" : "single";
+            string filePath = "Resources/Records/Record_" + strOption + " " + DateTime.Now.ToFileTimeUtc() + ".txt";
 
             using (StreamWriter sw = new StreamWriter(filePath, false, System.Text.Encoding.Default))
             {

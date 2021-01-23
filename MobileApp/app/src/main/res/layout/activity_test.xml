@@ -17,7 +17,8 @@
         android:layout_marginTop="260dp"
         android:background="@color/white"
         android:gravity="center"
-        android:textSize="25sp"></TextView>
+        android:textSize="25sp"
+        android:textColor="@color/black"></TextView>
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -51,5 +52,5 @@
         android:layout_marginTop="115dp"
         android:layout_marginBottom="13dp"
         android:gravity="bottom|center"
-        android:text="Заверишить" />
+        android:text="Завершить" />
 </LinearLayout>

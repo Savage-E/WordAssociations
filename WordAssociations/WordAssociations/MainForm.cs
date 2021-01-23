@@ -125,7 +125,16 @@ namespace WordAssociations
                         "Внимание!", MessageBoxButtons.OKCancel);
                 if (dr == DialogResult.OK)
                 {
-                    WordsLoader.LoadWords(testeeData, associationsList);
+                    if (chainOptionRadioButton.Checked)
+                    {
+                        WordsLoader.LoadWords(testeeData, associationsList,"1");
+                    }
+
+                    else
+                    {
+                        WordsLoader.LoadWords(testeeData, associationsList,"2");
+
+                    }
                     Restore();
                 }
             }
