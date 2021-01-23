@@ -34,7 +34,6 @@ class UserDataActivity : AppCompatActivity() {
 
                 val intent = Intent(this, TestOptionsActivity::class.java)
                 intent.putExtra("dataList", dataList)
-
                 startActivity(intent)
                 finish()
             }

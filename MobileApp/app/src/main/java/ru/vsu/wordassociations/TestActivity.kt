@@ -1,7 +1,7 @@
 package ru.vsu.wordassociations
 
 import android.app.AlertDialog
-import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +22,7 @@ class TestActivity : AppCompatActivity() {
         {
 
 
-            if (et_word.equals("")) {
+            if (et_word.text.toString().equals("")) {
                 Toast.makeText(this, "Введите ассоциацию!", Toast.LENGTH_SHORT).show()
             } else {
                 if (option.equals("Одно базовое слово")) {
@@ -39,9 +39,36 @@ class TestActivity : AppCompatActivity() {
                 }
             }
         }
-        btn_finish.setOnClickListener(){
+        btn_finish.setOnClickListener() {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Внимание!")
+            builder.setMessage("Вы дейстительно завершить?")
 
+
+            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+
+                val fileWriter =  WordWriter()
+                if (dataList != null) {
+                    fileWriter.write(dataList, this)
+                }
+                finish()
+            }
+
+            builder.setNegativeButton(android.R.string.no) { dialog, which ->
+
+            }
+
+            builder.setNeutralButton("Начать заново") { dialog, which ->
+                val intent = Intent(this, MainActivity::class.java)
+                val fileWriter =  WordWriter()
+                if (dataList != null) {
+                    fileWriter.write(dataList, this)
+                }
+                startActivity(intent)
+                finish()
+            }
+            builder.show()
         }
     }
-
 }
+
