@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_bg"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".TestActivity">
+
+
+    <TextView
+        android:id="@+id/txtField_word"
+        android:layout_width="313dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="260dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:textSize="25sp"></TextView>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+
+        android:hint="Ваша ассоциация"
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_word"
+            android:layout_width="380dp"
+            android:layout_height="60dp"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_submit_word"
+        android:layout_width="320dp"
+        android:layout_height="70dp"
+        android:text="Добавить" />
+
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_gravity="center_horizontal|center"
+        android:layout_marginTop="115dp"
+        android:layout_marginBottom="13dp"
+        android:gravity="bottom|center"
+        android:text="Заверишить" />
+</LinearLayout>

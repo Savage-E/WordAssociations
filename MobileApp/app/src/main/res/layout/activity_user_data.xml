@@ -8,6 +8,7 @@
     android:fillViewport="true"
     tools:context=".UserDataActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,11 +21,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Имя"
+            app:endIconMode="clear_text"
+            android:layout_margin="10dp">
 
-            app:endIconMode="clear_text">
-            >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -34,11 +36,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Фамилия"
-
+            android:layout_margin="10dp"
             app:endIconMode="clear_text">
             >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -47,6 +50,7 @@
             android:id="@+id/txtField_patronymic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:hint="Отчество"
             app:endIconMode="clear_text"
             app:helperText="Необязательно"
@@ -54,6 +58,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_patronymic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -61,17 +66,38 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtField_gender"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_margin="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Пол">
 
             <AutoCompleteTextView
+                android:id="@+id/tv_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtField_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Возраст"
+            android:layout_margin="10dp"
+
+            app:endIconMode="clear_text"
+            app:helperTextEnabled="true">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/btn_submit_user_data"
