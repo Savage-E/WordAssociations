@@ -4,42 +4,38 @@ import android.content.Context
 import android.os.Environment
 import java.io.File
 import java.io.FileOutputStream
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 public class WordWriter {
 
     fun write(dataList: ArrayList<String>, context: Context) {
+        val uniqueString: String = UUID.randomUUID().toString()
+        var fileName = ""
+        if (dataList.get(6).equals("Цепочка ассоциаций")) {
+            fileName = "Record" + "_chain" + "_" + uniqueString + ".txt"
+        } else {
+            fileName = "Record" + "_single" + "_" + uniqueString + ".txt"
 
-
-          var fileName = "Record" + dataList.get(6) + ".txt"
-          val data: String = dataList.get(1)
-        val folder_main = "Records"
-
-        val f = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), folder_main)
-        if (!f.exists()) {
-            f.mkdirs()
         }
 
-
-       /* val name = "suresh"
-        val folder: File =
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)*/
-        val myFile = File(f, fileName)
-        val fstream = FileOutputStream(myFile)
-        fstream.write(data.toByteArray())
-        fstream.close()
+        val path = context.getExternalFilesDir(null)
+        val letDirectory = File(path, "Records")
+        letDirectory.mkdirs()
+        val file = File(letDirectory, fileName)
 
 
-        /*val fileOutputStream: FileOutputStream
-        try {
-            fileOutputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE)
-            fileOutputStream.write(data.toByteArray())
-            fileOutputStream.close()
+        file.appendText(dataList.get(0) + " ")
+        file.appendText(dataList.get(1) + " ")
+        file.appendText(dataList.get(2) + " ")
+        file.appendText(dataList.get(3) + " ")
+        file.appendText(dataList.get(5) + " ")
+        file.appendText(dataList.get(4) + " ")
 
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }*/
+        for (i in 7..dataList.size) {
+            file.appendText("\n" + dataList.get(i))
+        }
 
     }
 

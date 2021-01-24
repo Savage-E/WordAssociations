@@ -47,10 +47,10 @@
     <Button
         android:id="@+id/btn_finish"
         android:layout_width="match_parent"
-        android:layout_height="59dp"
-        android:layout_gravity="center_horizontal|center"
+        android:layout_height="70dp"
+        android:layout_gravity=""
         android:layout_marginTop="115dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="14dp"
         android:gravity="bottom|center"
         android:text="Завершить" />
 </LinearLayout>

@@ -49,7 +49,7 @@ class TestActivity : AppCompatActivity() {
 
                 val fileWriter = WordWriter()
                 if (dataList != null) {
-                    fileWriter.write(dataList, this)
+                    fileWriter.write(dataList, applicationContext)
                 }
                 finish()
             }
@@ -62,10 +62,9 @@ class TestActivity : AppCompatActivity() {
 
 
                 val intent = Intent(this, MainActivity::class.java)
-                Toast.makeText(this, getFilesDir().toString(), Toast.LENGTH_SHORT).show()
                 val fileWriter = WordWriter()
                 if (dataList != null) {
-                    fileWriter.write(dataList, this)
+                    fileWriter.write(dataList, applicationContext)
                 }
                 startActivity(intent)
                 finish()

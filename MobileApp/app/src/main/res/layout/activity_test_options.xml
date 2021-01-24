@@ -44,5 +44,5 @@
         android:id="@+id/btn_submit_options"
         android:layout_width="320dp"
         android:layout_height="100dp"
-        android:text="Отправить" />
+        android:text="Далее" />
 </LinearLayout >
