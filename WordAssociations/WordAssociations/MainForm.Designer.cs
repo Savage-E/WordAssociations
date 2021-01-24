@@ -64,7 +64,6 @@ namespace WordAssociations
             this.outputWordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.outputWordTextBox.Location = new System.Drawing.Point(12, 92);
             this.outputWordTextBox.Name = "outputWordTextBox";
-            this.outputWordTextBox.ReadOnly = true;
             this.outputWordTextBox.Size = new System.Drawing.Size(140, 20);
             this.outputWordTextBox.TabIndex = 3;
             // 

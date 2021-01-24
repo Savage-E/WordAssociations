@@ -20,6 +20,7 @@ namespace WordAssociations
 
             associationsList = new List<string>();
             isStarted = false;
+            outputWordTextBox.ReadOnly = false;
         }
 
 
@@ -43,7 +44,9 @@ namespace WordAssociations
             {
                 MessageBox.Show("Сначала введите исходное слово в первую строку");
                 isStarted = true;
-                outputWordTextBox.ReadOnly = false;
+
+                chainOptionRadioButton.Enabled = false;
+                singleOprtionRadioButton.Enabled = false;
             }
         }
 
@@ -91,6 +94,7 @@ namespace WordAssociations
                     return;
                 }
 
+                outputWordTextBox.ReadOnly = true;
 
                 if (addAssocTextBox.Text != "")
                 {
@@ -113,6 +117,9 @@ namespace WordAssociations
             isStarted = false;
             outputWordTextBox.Text = "";
             associationsList = new List<string>();
+            chainOptionRadioButton.Enabled = true;
+            singleOprtionRadioButton.Enabled = true;
+            outputWordTextBox.ReadOnly = false;
         }
 
 
@@ -127,14 +134,14 @@ namespace WordAssociations
                 {
                     if (chainOptionRadioButton.Checked)
                     {
-                        WordsLoader.LoadWords(testeeData, associationsList,"1");
+                        WordsLoader.LoadWords(testeeData, associationsList, "1");
                     }
 
                     else
                     {
-                        WordsLoader.LoadWords(testeeData, associationsList,"2");
-
+                        WordsLoader.LoadWords(testeeData, associationsList, "2");
                     }
+
                     Restore();
                 }
             }

@@ -11,12 +11,13 @@ import kotlin.collections.ArrayList
 public class WordWriter {
 
     fun write(dataList: ArrayList<String>, context: Context) {
-        val uniqueString: String = UUID.randomUUID().toString()
+        //val uniqueString: String = UUID.randomUUID().toString()
+
         var fileName = ""
         if (dataList.get(6).equals("Цепочка ассоциаций")) {
-            fileName = "Record" + "_chain" + "_" + uniqueString + ".txt"
+            fileName = "Record" + "_chain" + "_" + Date().time.toBigDecimal() + ".txt"
         } else {
-            fileName = "Record" + "_single" + "_" + uniqueString + ".txt"
+            fileName = "Record" + "_single" + "_" + Date().time.toBigDecimal()  + ".txt"
 
         }
 
@@ -33,7 +34,7 @@ public class WordWriter {
         file.appendText(dataList.get(5) + " ")
         file.appendText(dataList.get(4) + " ")
 
-        for (i in 7..dataList.size) {
+        for (i in 7..dataList.size-1) {
             file.appendText("\n" + dataList.get(i))
         }
 

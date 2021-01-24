@@ -9,8 +9,19 @@ namespace WordAssociations
     {
         public static void LoadWords(string[] testeeData, List<string> associationsList, string option)
         {
-            string strOption = option == "1" ? "chain" : "single";
-            string filePath = "Resources/Records/Record_" + strOption + " " + DateTime.Now.ToFileTimeUtc() + ".txt";
+
+            string filePath = "";
+            if (option == "1")
+            {
+                 filePath = "Resources/Records/Record_" + "single" + "_" + DateTime.Now.ToFileTimeUtc() + ".txt";
+                
+            }
+            else
+            {       
+                 filePath = "Resources/Records/Record_" + "chain" + "_" + DateTime.Now.ToFileTimeUtc() + ".txt";
+
+                
+            }
 
             using (StreamWriter sw = new StreamWriter(filePath, false, System.Text.Encoding.Default))
             {
