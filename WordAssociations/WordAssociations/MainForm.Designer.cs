@@ -76,7 +76,7 @@ namespace WordAssociations
             this.associationLabel.Name = "associationLabel";
             this.associationLabel.Size = new System.Drawing.Size(140, 61);
             this.associationLabel.TabIndex = 4;
-            this.associationLabel.Text = "Ниже вы увидите слово, для которого следует написать ассоциации";
+            this.associationLabel.Text = "В первой строке задайте исходное слово. Затем пишите ассоциации во второй строке";
             // 
             // addAssocTextBox
             // 
