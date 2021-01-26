@@ -51,8 +51,11 @@ namespace WordAssociations
             this.startButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.workOptionGroupBox = new System.Windows.Forms.GroupBox();
-            this.singleOprtionRadioButton = new System.Windows.Forms.RadioButton();
+            this.singleOptionRadioButton = new System.Windows.Forms.RadioButton();
             this.chainOptionRadioButton = new System.Windows.Forms.RadioButton();
+            this.instructionsButton = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.wordCountLabel = new System.Windows.Forms.Label();
             this.testeeGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.ageNumericUpDown)).BeginInit();
             this.workOptionGroupBox.SuspendLayout();
@@ -62,9 +65,11 @@ namespace WordAssociations
             // 
             this.outputWordTextBox.BackColor = System.Drawing.SystemColors.Info;
             this.outputWordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.outputWordTextBox.Location = new System.Drawing.Point(12, 92);
+            this.outputWordTextBox.Enabled = false;
+            this.outputWordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.outputWordTextBox.Location = new System.Drawing.Point(299, 330);
             this.outputWordTextBox.Name = "outputWordTextBox";
-            this.outputWordTextBox.Size = new System.Drawing.Size(140, 20);
+            this.outputWordTextBox.Size = new System.Drawing.Size(310, 32);
             this.outputWordTextBox.TabIndex = 3;
             // 
             // associationLabel
@@ -72,17 +77,19 @@ namespace WordAssociations
             this.associationLabel.BackColor = System.Drawing.SystemColors.Info;
             this.associationLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.associationLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.associationLabel.Location = new System.Drawing.Point(12, 12);
+            this.associationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.associationLabel.Location = new System.Drawing.Point(299, 25);
             this.associationLabel.Name = "associationLabel";
-            this.associationLabel.Size = new System.Drawing.Size(140, 61);
+            this.associationLabel.Size = new System.Drawing.Size(310, 251);
             this.associationLabel.TabIndex = 4;
-            this.associationLabel.Text = "Ниже вы увидите слово, для которого следует написать ассоциации";
             // 
             // addAssocTextBox
             // 
-            this.addAssocTextBox.Location = new System.Drawing.Point(12, 129);
+            this.addAssocTextBox.Enabled = false;
+            this.addAssocTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.addAssocTextBox.Location = new System.Drawing.Point(299, 390);
             this.addAssocTextBox.Name = "addAssocTextBox";
-            this.addAssocTextBox.Size = new System.Drawing.Size(140, 20);
+            this.addAssocTextBox.Size = new System.Drawing.Size(310, 32);
             this.addAssocTextBox.TabIndex = 6;
             this.addAssocTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.addAssocTextBox_KeyDown);
             // 
@@ -101,103 +108,106 @@ namespace WordAssociations
             this.testeeGroupBox.Controls.Add(this.lastNameTextBox);
             this.testeeGroupBox.Controls.Add(this.firstNameTextBox);
             this.testeeGroupBox.Controls.Add(this.addTesteeButton);
-            this.testeeGroupBox.Location = new System.Drawing.Point(328, 12);
+            this.testeeGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.testeeGroupBox.Location = new System.Drawing.Point(669, 24);
             this.testeeGroupBox.Name = "testeeGroupBox";
-            this.testeeGroupBox.Size = new System.Drawing.Size(239, 229);
+            this.testeeGroupBox.Size = new System.Drawing.Size(328, 296);
             this.testeeGroupBox.TabIndex = 8;
             this.testeeGroupBox.TabStop = false;
             this.testeeGroupBox.Text = "Данные испытуемого";
             // 
             // genderComboBox
             // 
-            this.genderComboBox.FormattingEnabled = true;
             this.genderComboBox.Items.AddRange(new object[] {"Мужской", "Женский"});
-            this.genderComboBox.Location = new System.Drawing.Point(127, 157);
+            this.genderComboBox.Location = new System.Drawing.Point(137, 198);
             this.genderComboBox.Name = "genderComboBox";
-            this.genderComboBox.Size = new System.Drawing.Size(97, 21);
+            this.genderComboBox.Size = new System.Drawing.Size(97, 28);
             this.genderComboBox.TabIndex = 14;
             // 
             // genderLabel
             // 
-            this.genderLabel.Location = new System.Drawing.Point(127, 138);
+            this.genderLabel.Location = new System.Drawing.Point(134, 172);
             this.genderLabel.Name = "genderLabel";
-            this.genderLabel.Size = new System.Drawing.Size(69, 16);
+            this.genderLabel.Size = new System.Drawing.Size(69, 23);
             this.genderLabel.TabIndex = 11;
             this.genderLabel.Text = "Пол";
             // 
             // ageNumericUpDown
             // 
-            this.ageNumericUpDown.Location = new System.Drawing.Point(187, 104);
+            this.ageNumericUpDown.Location = new System.Drawing.Point(187, 143);
             this.ageNumericUpDown.Name = "ageNumericUpDown";
-            this.ageNumericUpDown.Size = new System.Drawing.Size(47, 20);
+            this.ageNumericUpDown.Size = new System.Drawing.Size(47, 27);
             this.ageNumericUpDown.TabIndex = 10;
             // 
             // testeeLabel
             // 
             this.testeeLabel.Location = new System.Drawing.Point(15, 28);
             this.testeeLabel.Name = "testeeLabel";
-            this.testeeLabel.Size = new System.Drawing.Size(143, 46);
+            this.testeeLabel.Size = new System.Drawing.Size(270, 85);
             this.testeeLabel.TabIndex = 9;
             this.testeeLabel.Visible = false;
             // 
             // ageLabel
             // 
-            this.ageLabel.Location = new System.Drawing.Point(184, 85);
+            this.ageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.ageLabel.Location = new System.Drawing.Point(184, 114);
             this.ageLabel.Name = "ageLabel";
-            this.ageLabel.Size = new System.Drawing.Size(55, 16);
+            this.ageLabel.Size = new System.Drawing.Size(101, 26);
             this.ageLabel.TabIndex = 8;
             this.ageLabel.Text = "Возраст";
             // 
             // patronymicLabel
             // 
-            this.patronymicLabel.Location = new System.Drawing.Point(12, 139);
+            this.patronymicLabel.Location = new System.Drawing.Point(6, 172);
             this.patronymicLabel.Name = "patronymicLabel";
-            this.patronymicLabel.Size = new System.Drawing.Size(74, 16);
+            this.patronymicLabel.Size = new System.Drawing.Size(101, 22);
             this.patronymicLabel.TabIndex = 7;
             this.patronymicLabel.Text = "Отчество";
             // 
             // lastNameLabel
             // 
-            this.lastNameLabel.Location = new System.Drawing.Point(108, 84);
+            this.lastNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.lastNameLabel.Location = new System.Drawing.Point(86, 113);
             this.lastNameLabel.Name = "lastNameLabel";
-            this.lastNameLabel.Size = new System.Drawing.Size(74, 16);
+            this.lastNameLabel.Size = new System.Drawing.Size(92, 26);
             this.lastNameLabel.TabIndex = 6;
             this.lastNameLabel.Text = "Фамилия";
             // 
             // nameLabel
             // 
-            this.nameLabel.Location = new System.Drawing.Point(12, 84);
+            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.nameLabel.Location = new System.Drawing.Point(6, 113);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(74, 16);
+            this.nameLabel.Size = new System.Drawing.Size(74, 26);
             this.nameLabel.TabIndex = 5;
             this.nameLabel.Text = "Имя";
             // 
             // patronymicTextBox
             // 
-            this.patronymicTextBox.Location = new System.Drawing.Point(6, 158);
+            this.patronymicTextBox.Location = new System.Drawing.Point(6, 198);
             this.patronymicTextBox.Name = "patronymicTextBox";
-            this.patronymicTextBox.Size = new System.Drawing.Size(101, 20);
+            this.patronymicTextBox.Size = new System.Drawing.Size(101, 27);
             this.patronymicTextBox.TabIndex = 3;
             // 
             // lastNameTextBox
             // 
-            this.lastNameTextBox.Location = new System.Drawing.Point(101, 103);
+            this.lastNameTextBox.Location = new System.Drawing.Point(98, 142);
             this.lastNameTextBox.Name = "lastNameTextBox";
-            this.lastNameTextBox.Size = new System.Drawing.Size(80, 20);
+            this.lastNameTextBox.Size = new System.Drawing.Size(80, 27);
             this.lastNameTextBox.TabIndex = 2;
             // 
             // firstNameTextBox
             // 
-            this.firstNameTextBox.Location = new System.Drawing.Point(6, 103);
+            this.firstNameTextBox.Location = new System.Drawing.Point(6, 142);
             this.firstNameTextBox.Name = "firstNameTextBox";
-            this.firstNameTextBox.Size = new System.Drawing.Size(80, 20);
+            this.firstNameTextBox.Size = new System.Drawing.Size(80, 27);
             this.firstNameTextBox.TabIndex = 1;
             // 
             // addTesteeButton
             // 
-            this.addTesteeButton.Location = new System.Drawing.Point(61, 198);
+            this.addTesteeButton.Location = new System.Drawing.Point(86, 231);
             this.addTesteeButton.Name = "addTesteeButton";
-            this.addTesteeButton.Size = new System.Drawing.Size(80, 25);
+            this.addTesteeButton.Size = new System.Drawing.Size(117, 35);
             this.addTesteeButton.TabIndex = 0;
             this.addTesteeButton.Text = "Добавить испытуемого";
             this.addTesteeButton.UseVisualStyleBackColor = true;
@@ -205,9 +215,11 @@ namespace WordAssociations
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(12, 170);
+            this.startButton.Enabled = false;
+            this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.startButton.Location = new System.Drawing.Point(273, 516);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(75, 23);
+            this.startButton.Size = new System.Drawing.Size(174, 46);
             this.startButton.TabIndex = 9;
             this.startButton.Text = "Старт";
             this.startButton.UseVisualStyleBackColor = true;
@@ -215,9 +227,11 @@ namespace WordAssociations
             // 
             // stopButton
             // 
-            this.stopButton.Location = new System.Drawing.Point(93, 170);
+            this.stopButton.Enabled = false;
+            this.stopButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.stopButton.Location = new System.Drawing.Point(476, 516);
             this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(77, 23);
+            this.stopButton.Size = new System.Drawing.Size(208, 47);
             this.stopButton.TabIndex = 10;
             this.stopButton.Text = "Завершить";
             this.stopButton.UseVisualStyleBackColor = true;
@@ -225,40 +239,68 @@ namespace WordAssociations
             // 
             // workOptionGroupBox
             // 
-            this.workOptionGroupBox.Controls.Add(this.singleOprtionRadioButton);
+            this.workOptionGroupBox.Controls.Add(this.singleOptionRadioButton);
             this.workOptionGroupBox.Controls.Add(this.chainOptionRadioButton);
-            this.workOptionGroupBox.Location = new System.Drawing.Point(165, 12);
+            this.workOptionGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.workOptionGroupBox.Location = new System.Drawing.Point(12, 301);
             this.workOptionGroupBox.Name = "workOptionGroupBox";
-            this.workOptionGroupBox.Size = new System.Drawing.Size(157, 80);
+            this.workOptionGroupBox.Size = new System.Drawing.Size(228, 121);
             this.workOptionGroupBox.TabIndex = 13;
             this.workOptionGroupBox.TabStop = false;
             this.workOptionGroupBox.Text = "Режим работы";
             // 
-            // singleOprtionRadioButton
+            // singleOptionRadioButton
             // 
-            this.singleOprtionRadioButton.Location = new System.Drawing.Point(13, 50);
-            this.singleOprtionRadioButton.Name = "singleOprtionRadioButton";
-            this.singleOprtionRadioButton.Size = new System.Drawing.Size(104, 24);
-            this.singleOprtionRadioButton.TabIndex = 1;
-            this.singleOprtionRadioButton.TabStop = true;
-            this.singleOprtionRadioButton.Text = "Одно слово";
-            this.singleOprtionRadioButton.UseVisualStyleBackColor = true;
+            this.singleOptionRadioButton.Location = new System.Drawing.Point(13, 69);
+            this.singleOptionRadioButton.Name = "singleOptionRadioButton";
+            this.singleOptionRadioButton.Size = new System.Drawing.Size(144, 24);
+            this.singleOptionRadioButton.TabIndex = 1;
+            this.singleOptionRadioButton.TabStop = true;
+            this.singleOptionRadioButton.Text = "Одно слово";
+            this.singleOptionRadioButton.UseVisualStyleBackColor = true;
+            this.singleOptionRadioButton.CheckedChanged += new System.EventHandler(this.singleOptionRadioButton_CheckedChanged);
             // 
             // chainOptionRadioButton
             // 
             this.chainOptionRadioButton.Location = new System.Drawing.Point(13, 25);
             this.chainOptionRadioButton.Name = "chainOptionRadioButton";
-            this.chainOptionRadioButton.Size = new System.Drawing.Size(138, 24);
+            this.chainOptionRadioButton.Size = new System.Drawing.Size(209, 24);
             this.chainOptionRadioButton.TabIndex = 0;
             this.chainOptionRadioButton.TabStop = true;
             this.chainOptionRadioButton.Text = "Цепочка ассоциаций";
             this.chainOptionRadioButton.UseVisualStyleBackColor = true;
+            this.chainOptionRadioButton.CheckedChanged += new System.EventHandler(this.chainOptionRadioButton_CheckedChanged);
+            // 
+            // instructionsButton
+            // 
+            this.instructionsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.instructionsButton.Location = new System.Drawing.Point(12, 502);
+            this.instructionsButton.Name = "instructionsButton";
+            this.instructionsButton.Size = new System.Drawing.Size(178, 60);
+            this.instructionsButton.TabIndex = 14;
+            this.instructionsButton.Text = "Добавить инструкцию";
+            this.instructionsButton.UseVisualStyleBackColor = true;
+            this.instructionsButton.Click += new System.EventHandler(this.instructionsButton_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            // 
+            // wordCountLabel
+            // 
+            this.wordCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.wordCountLabel.Location = new System.Drawing.Point(309, 287);
+            this.wordCountLabel.Name = "wordCountLabel";
+            this.wordCountLabel.Size = new System.Drawing.Size(299, 33);
+            this.wordCountLabel.TabIndex = 15;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 367);
+            this.ClientSize = new System.Drawing.Size(1009, 608);
+            this.Controls.Add(this.wordCountLabel);
+            this.Controls.Add(this.instructionsButton);
             this.Controls.Add(this.workOptionGroupBox);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.startButton);
@@ -270,6 +312,8 @@ namespace WordAssociations
             this.MinimumSize = new System.Drawing.Size(595, 406);
             this.Name = "MainForm";
             this.Text = "Word Associations";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.testeeGroupBox.ResumeLayout(false);
             this.testeeGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) (this.ageNumericUpDown)).EndInit();
@@ -278,12 +322,18 @@ namespace WordAssociations
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.Label wordCountLabel;
+
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+
+        private System.Windows.Forms.Button instructionsButton;
+
         private System.Windows.Forms.ComboBox genderComboBox;
 
         private System.Windows.Forms.Label genderLabel;
 
         private System.Windows.Forms.RadioButton chainOptionRadioButton;
-        private System.Windows.Forms.RadioButton singleOprtionRadioButton;
+        private System.Windows.Forms.RadioButton singleOptionRadioButton;
         private System.Windows.Forms.GroupBox workOptionGroupBox;
 
         private System.Windows.Forms.NumericUpDown ageNumericUpDown;
