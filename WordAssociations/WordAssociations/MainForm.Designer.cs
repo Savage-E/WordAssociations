@@ -241,6 +241,7 @@ namespace WordAssociations
             // 
             this.workOptionGroupBox.Controls.Add(this.singleOptionRadioButton);
             this.workOptionGroupBox.Controls.Add(this.chainOptionRadioButton);
+            this.workOptionGroupBox.Enabled = false;
             this.workOptionGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
             this.workOptionGroupBox.Location = new System.Drawing.Point(12, 301);
             this.workOptionGroupBox.Name = "workOptionGroupBox";

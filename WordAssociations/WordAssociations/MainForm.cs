@@ -11,7 +11,8 @@ namespace WordAssociations
     public partial class MainForm : Form
     {
         private string[] testeeData;
-        private List<string> associationsList;
+
+        private string[,] associations;
         private bool isStarted;
         private bool isUserAdded;
         private string[] instructions;
@@ -20,18 +21,9 @@ namespace WordAssociations
         private int chainNumber;
         private int currentIndex;
 
-        private DataTable dt;
-
         public MainForm()
         {
             InitializeComponent();
-            testeeData = new string[5];
-            associationsList = new List<string>();
-            isStarted = false;
-            isUserAdded = false;
-            outputWordTextBox.ReadOnly = false;
-            genderComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            dt = new DataTable("Associations");
         }
 
 
@@ -41,10 +33,6 @@ namespace WordAssociations
             {
                 MessageBox.Show("Введите данные испытуемого!");
             }
-            else if (isStarted == true)
-            {
-                MessageBox.Show("Тест уже запущен!");
-            }
 
             else if (chainOptionRadioButton.Checked == false && singleOptionRadioButton.Checked == false)
             {
@@ -53,9 +41,10 @@ namespace WordAssociations
 
             else
             {
-                DataColumn column;
-                DataRow row;
+                addTesteeButton.Enabled = false;
+                instructionsButton.Enabled = false;
                 startButton.Enabled = false;
+                workOptionGroupBox.Enabled = false;
                 isStarted = true;
                 addAssocTextBox.Enabled = true;
                 chainOptionRadioButton.Enabled = false;
@@ -66,11 +55,7 @@ namespace WordAssociations
                 currentIndex = 1;
                 chainNumber = int.Parse(instructions[0].Split(' ')[0]);
                 wordCountLabel.Text = 1 + " из " + amount + "  Цепочка номер: " + currentIndex;
-                column = new DataColumn();
-                column.DataType = System.Type.GetType("System.String");
-                column.ColumnName = instructions[currentIndex];
-                dt.Columns.Add(column);
-                
+                associations[0, 0] = instructions[1];
             }
         }
 
@@ -78,9 +63,10 @@ namespace WordAssociations
         private void addTesteeButton_Click(object sender, EventArgs e)
         {
             if (firstNameTextBox.Text == "" || lastNameLabel.Text == "" || ageNumericUpDown.Value == 0 ||
-                genderLabel.Text == "")
+                genderComboBox.Text == ""
+                || patronymicTextBox.Text == "")
             {
-                MessageBox.Show("Введите Имя, Фамилию, Отчество(если имеется), пол и возраст!");
+                MessageBox.Show("Введите Имя, Фамилию, Отчество, пол и возраст!");
             }
 
             else
@@ -105,34 +91,39 @@ namespace WordAssociations
                 ageNumericUpDown.Text = "";
                 genderComboBox.Text = "";
                 isUserAdded = true;
-
+                workOptionGroupBox.Enabled = true;
                 testeeGroupBox.Size = new Size(329, 100);
             }
         }
 
         private void addAssocTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && isStarted  )
+            if (e.KeyCode == Keys.Enter && isStarted)
             {
                 e.SuppressKeyPress = true;
 
 
                 if (addAssocTextBox.Text != "")
                 {
-                    DataRow row;
                     if (count != amount)
                     {
+                        associations[currentIndex - 1, count - 1] = outputWordTextBox.Text;
+
                         count++;
-                        wordCountLabel.Text = count + " из " + amount + "  Цепочка номер: " + currentIndex;
-                        row = dt.NewRow();
-                        row[instructions[currentIndex]] = addAssocTextBox.Text.Trim();
+                        if (count > amount)
+                            wordCountLabel.Text = count - 1 + " из " + amount + "  Цепочка номер: " + currentIndex;
+                        else
+                        {
+                            wordCountLabel.Text = count + " из " + amount + "  Цепочка номер: " + currentIndex;
+                        }
+
                         bool option = chainOptionRadioButton.Checked;
                         if (option)
                         {
                             outputWordTextBox.Text = addAssocTextBox.Text.Trim();
                         }
 
-                        dt.Rows.Add(row);
+
                         addAssocTextBox.Text = "";
                     }
                     else
@@ -146,66 +137,31 @@ namespace WordAssociations
             }
         }
 
-        private void nextWord()
-        {
-            DataColumn column;
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.String");
-            column.ColumnName = instructions[currentIndex];
-            dt.Columns.Add(column);
-            addAssocTextBox.Enabled = true;
-            outputWordTextBox.Text = instructions[currentIndex];
-            count = 1;
-            amount = amount = int.Parse(instructions[0].Split(' ')[1]);
-            wordCountLabel.Text = count + " из " + amount + "  Цепочка номер: " + currentIndex;
-        }
-
-        /*private void Restore()
-        {
-            isStarted = false;
-            outputWordTextBox.Text = "";
-            associationsList = new List<string>();
-            chainOptionRadioButton.Enabled = true;
-            singleOptionRadioButton.Enabled = true;
-        }*/
-
 
         private void stopButton_Click(object sender, EventArgs e)
         {
-            /*if (isStarted == true)
-            {
-                DialogResult dr =
-                    MessageBox.Show("Вы уверены, что хотите завершить тест?",
-                        "Внимание!", MessageBoxButtons.OKCancel);
-                if (dr == DialogResult.OK)
-                {
-                    if (chainOptionRadioButton.Checked)
-                    {
-                        WordsLoader.WriteWords(testeeData, associationsList, "1");
-                    }
-
-                    else
-                    {
-                        WordsLoader.WriteWords(testeeData, associationsList, "2");
-                    }
-
-                    Restore();
-                }
-            }*/
             if (currentIndex - 1 == chainNumber)
             {
                 MessageBox.Show("Тестирование завершено. Спасибо");
-                ResultWriter.writeData(testeeData, dt);
+                ResultWriter.writeData(testeeData, associations, instructions);
                 Application.Exit();
             }
 
             else
             {
                 stopButton.Enabled = false;
-                nextWord();
+                NextWord();
             }
         }
 
+        private void NextWord()
+        {
+            addAssocTextBox.Enabled = true;
+            outputWordTextBox.Text = instructions[currentIndex];
+            count = 1;
+
+            wordCountLabel.Text = count + " из " + amount + "  Цепочка номер: " + currentIndex;
+        }
 
         private void instructionsButton_Click(object sender, EventArgs e)
         {
@@ -216,6 +172,8 @@ namespace WordAssociations
                 // получаем выбранный файл
                 string filename = openFileDialog.FileName;
                 instructions = InstructionLoader.LoadInstruction(filename, instructions);
+                associations = new string[int.Parse(instructions[0].Split(' ')[0]),
+                    int.Parse(instructions[0].Split(' ')[1])];
             }
             catch (Exception exception)
             {
@@ -227,17 +185,27 @@ namespace WordAssociations
         {
             try
             {
-                InstructionLoader.LoadInstruction("Resources/instruction.txt", instructions);
+                instructions = InstructionLoader.LoadInstruction("Resources/instruction_C.txt", instructions);
             }
             catch (Exception exception)
             {
                 MessageBox.Show("Отсутствует файл с инструкцией, загрузите новый, нажав на соответствующую кнопку");
             }
+
+            testeeData = new string[5];
+
+            associations = new string[int.Parse(instructions[0].Split(' ')[0]),
+                int.Parse(instructions[0].Split(' ')[1])];
+            isStarted = false;
+            isUserAdded = false;
+            outputWordTextBox.ReadOnly = false;
+            genderComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
+
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveInstruction.SaveInst(instructions);
+            InstructionSaver.SaveInst(instructions);
         }
 
         private void chainOptionRadioButton_CheckedChanged(object sender, EventArgs e)

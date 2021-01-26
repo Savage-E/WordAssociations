@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Data;
 using System.IO;
 using System.Text;
@@ -7,34 +8,27 @@ namespace WordAssociations
 {
     public static class ResultWriter
     {
-        public static void writeData(string[] testeeData, DataTable dataTable ,string [] instructions)
+        public static void writeData(string[] testeeData, string[,] associations, string[] instructions)
         {
-            string filePath = "";
-
-            filePath = "Resources/Records/" + testeeData[1] + " " + testeeData[0][0] + " " + testeeData[2][0] +
-                       " " + DateTime.Now.ToString("dd.MM.yyyy hh.mm.ss") +
-                       ".txt";
+            string filePath = "Resources/Records/" + testeeData[1] + " " + testeeData[0][0] + " " + testeeData[2][0] +
+                              " " + DateTime.Now.ToString("dd.MM.yyyy HH.mm.ss") +
+                              ".txt";
 
 
-            using (StreamWriter sw = new StreamWriter(filePath, false, System.Text.Encoding.Default))
+            using (StreamWriter sw = new StreamWriter(filePath, false, System.Text.Encoding.UTF8))
             {
                 for (int i = 0; i < testeeData.Length - 1; i++)
                 {
                     sw.Write(testeeData[i] + " ");
                 }
-
-                sw.Write(testeeData[4] + "\n");
-
-                DataColumnCollection columns = dataTable.Columns;
-                foreach (var name in columns)
+                sw.WriteLine();
+                for (int i = 0; i < associations.GetLength(0); i++)
                 {
-                    sw.Write(name+" ");
-                }
-                sw.Write("\n");
-                DataRowCollection rows = dataTable.Rows;
-                foreach (DataRow data in rows)
-                {
-                //    sw.WriteLine(data[instructions[]]);
+                    for (int j = 0; j < associations.GetLength(1); j++)
+                    {
+                        sw.Write(associations[i,j]+" ");
+                    }
+                    sw.WriteLine();
                 }
             }
         }
