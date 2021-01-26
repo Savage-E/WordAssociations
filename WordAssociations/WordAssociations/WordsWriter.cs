@@ -7,20 +7,20 @@ namespace WordAssociations
 {
     public static class WordsLoader
     {
-        public static void LoadWords(string[] testeeData, List<string> associationsList, string option)
+        public static void WriteWords(string[] testeeData, List<string> associationsList, string option)
         {
-
             string filePath = "";
             if (option == "1")
             {
-                 filePath = "Resources/Records/Record_" + "single" + "_" + DateTime.Now.ToFileTimeUtc() + ".txt";
-                
+                filePath = "Resources/Records/" + testeeData[2] + " " + testeeData[0][0] + " " + testeeData[1][0] +
+                           " " + DateTime.Now.ToString("dd.MM.yyyy hh.mm.ss") +
+                           ".txt";
             }
             else
-            {       
-                 filePath = "Resources/Records/Record_" + "chain" + "_" + DateTime.Now.ToFileTimeUtc() + ".txt";
-
-                
+            {
+                filePath = "Resources/Records/" + testeeData[2] + " " + testeeData[0][0] + " " + testeeData[1][0] +
+                           " " + DateTime.Now.ToString("dd.MM.yyyy hh.mm.ss") +
+                           ".txt";
             }
 
             using (StreamWriter sw = new StreamWriter(filePath, false, System.Text.Encoding.Default))
