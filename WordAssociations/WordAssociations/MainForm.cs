@@ -41,6 +41,10 @@ namespace WordAssociations
             {
                 MessageBox.Show("Выберите режим работы!");
             }
+            else if (setttings == null)
+            {
+                MessageBox.Show("Добавьте настройки!");
+            }
 
             else
             {
@@ -77,7 +81,7 @@ namespace WordAssociations
 
                 count = 1;
                 currentIndex = 1;
-                wordCountLabel.Text = 1 + " из " + amount + "  Цепочка номер: " + currentIndex;
+                wordCountLabel.Text = 1 + " из " + amount + "  Цепочка номер: " + currentIndex + " из " + chainNumber;
             }
         }
 
@@ -133,10 +137,12 @@ namespace WordAssociations
 
                         count++;
                         if (count > amount)
-                            wordCountLabel.Text = count - 1 + " из " + amount + "  Цепочка номер: " + currentIndex;
+                            wordCountLabel.Text = count - 1 + " из " + amount + "  Цепочка номер: " + currentIndex +
+                                                  " из " + chainNumber;
                         else
                         {
-                            wordCountLabel.Text = count + " из " + amount + "  Цепочка номер: " + currentIndex;
+                            wordCountLabel.Text = count + " из " + amount + "  Цепочка номер: " + currentIndex +
+                                                  " из " + chainNumber;
                         }
 
                         bool option = chainOptionRadioButton.Checked;
@@ -205,7 +211,7 @@ namespace WordAssociations
 
             count = 1;
 
-            wordCountLabel.Text = count + " из " + amount + "  Цепочка номер: " + currentIndex;
+            wordCountLabel.Text = count + " из " + amount + "  Цепочка номер: " + currentIndex + " из " + chainNumber;
         }
 
         private void instructionsButton_Click(object sender, EventArgs e)
@@ -267,12 +273,12 @@ namespace WordAssociations
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (setttings.Length != 0 )
+            if (setttings.Length != 0)
             {
                 SettingsSaver.SaveInst(setttings);
             }
 
-            if (instruction.Length != 0  || instruction != null )
+            if (instruction.Length != 0 || instruction != null)
             {
                 InstructionSaver.saveInst(instruction);
             }
@@ -290,7 +296,7 @@ namespace WordAssociations
                 associations = new string[
                     int.Parse(setttings[0].Split(' ')[1]), int.Parse(setttings[0].Split(' ')[0])];
                 InstructionLabel.Text = "";
-                if (instruction.Length != 0  || setttings != null)
+                if (instruction.Length != 0 || setttings != null)
                 {
                     foreach (var data in instruction)
                     {
@@ -310,17 +316,18 @@ namespace WordAssociations
             else
             {
                 InstructionLabel.Text = "";
-                if (instruction.Length != 0  || setttings != null)
+                if (instruction.Length != 0 || setttings != null)
                 {
                     foreach (var data in instruction)
                     {
                         InstructionLabel.Text += data;
                     }
                 }
-            ind = int.Parse(setttings[0].Split(' ')[0]) + 1;
-            index = int.Parse(setttings[ind].Split(' ')[0]);
-            associations = new string[
-                int.Parse(setttings[ind].Split(' ')[1]), index];
+
+                ind = int.Parse(setttings[0].Split(' ')[0]) + 1;
+                index = int.Parse(setttings[ind].Split(' ')[0]);
+                associations = new string[
+                    int.Parse(setttings[ind].Split(' ')[1]), index];
             }
         }
 

@@ -11,11 +11,11 @@ import kotlin.collections.ArrayList
 public class WordWriter {
 
     fun write(dataList: ArrayList<String>, context: Context) {
-        //val uniqueString: String = UUID.randomUUID().toString()
+
 
         var fileName = ""
         if (dataList.get(6).equals("Цепочка ассоциаций")) {
-            fileName = "Record" + "_chain" + "_" + Date().time.toBigDecimal() + ".txt"
+            fileName = "Record" + "_chain" + "_" + Date().time.toString() + ".txt"
         } else {
             fileName = "Record" + "_single" + "_" + Date().time.toBigDecimal()  + ".txt"
 
