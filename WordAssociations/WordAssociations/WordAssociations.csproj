@@ -46,8 +46,10 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="ResultWriter.cs" />
         <Compile Include="InstructionLoader.cs" />
+        <Compile Include="InstructionSaver.cs" />
+        <Compile Include="ResultWriter.cs" />
+        <Compile Include="SettingsLoader.cs" />
         <Compile Include="MainForm.cs">
           <SubType>Form</SubType>
         </Compile>
@@ -56,8 +58,7 @@
         </Compile>
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="InstructionSaver.cs" />
-        <Compile Include="WordsWriter.cs" />
+        <Compile Include="SettingsSaver.cs" />
         <EmbeddedResource Include="MainForm.resx">
           <DependentUpon>MainForm.cs</DependentUpon>
         </EmbeddedResource>

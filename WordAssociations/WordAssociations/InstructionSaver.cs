@@ -1,21 +1,17 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 
 namespace WordAssociations
 {
-    public static class InstructionSaver
+    public class InstructionSaver
     {
-        public static void SaveInst(string[] instruction)
+        public static void saveInst(string[] instruction)
         {
-            using (StreamWriter sw = new StreamWriter("Resources/instruction_C.txt", false, System.Text.Encoding.UTF8))
+            using (StreamWriter sw = new StreamWriter("Resources/instruction.txt", false, System.Text.Encoding.UTF8))
             {
-                int length = instruction.Length;
-                for (int i = 0; i < length - 1; i++)
+                foreach (var i in instruction)
                 {
-                    sw.WriteLine(instruction[i]);
+                    sw.WriteLine(i);
                 }
-
-                sw.Write(instruction[length - 1]);
             }
         }
     }

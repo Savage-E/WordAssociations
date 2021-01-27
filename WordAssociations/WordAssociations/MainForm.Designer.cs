@@ -33,7 +33,7 @@ namespace WordAssociations
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.outputWordTextBox = new System.Windows.Forms.TextBox();
-            this.associationLabel = new System.Windows.Forms.Label();
+            this.InstructionLabel = new System.Windows.Forms.Label();
             this.addAssocTextBox = new System.Windows.Forms.TextBox();
             this.testeeGroupBox = new System.Windows.Forms.GroupBox();
             this.genderComboBox = new System.Windows.Forms.ComboBox();
@@ -53,9 +53,10 @@ namespace WordAssociations
             this.workOptionGroupBox = new System.Windows.Forms.GroupBox();
             this.singleOptionRadioButton = new System.Windows.Forms.RadioButton();
             this.chainOptionRadioButton = new System.Windows.Forms.RadioButton();
-            this.instructionsButton = new System.Windows.Forms.Button();
+            this.SettingsButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.wordCountLabel = new System.Windows.Forms.Label();
+            this.addInstructionButton = new System.Windows.Forms.Button();
             this.testeeGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.ageNumericUpDown)).BeginInit();
             this.workOptionGroupBox.SuspendLayout();
@@ -72,16 +73,16 @@ namespace WordAssociations
             this.outputWordTextBox.Size = new System.Drawing.Size(310, 32);
             this.outputWordTextBox.TabIndex = 3;
             // 
-            // associationLabel
+            // InstructionLabel
             // 
-            this.associationLabel.BackColor = System.Drawing.SystemColors.Info;
-            this.associationLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.associationLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.associationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
-            this.associationLabel.Location = new System.Drawing.Point(299, 25);
-            this.associationLabel.Name = "associationLabel";
-            this.associationLabel.Size = new System.Drawing.Size(310, 251);
-            this.associationLabel.TabIndex = 4;
+            this.InstructionLabel.BackColor = System.Drawing.SystemColors.Info;
+            this.InstructionLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InstructionLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.InstructionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.InstructionLabel.Location = new System.Drawing.Point(299, 25);
+            this.InstructionLabel.Name = "InstructionLabel";
+            this.InstructionLabel.Size = new System.Drawing.Size(310, 251);
+            this.InstructionLabel.TabIndex = 4;
             // 
             // addAssocTextBox
             // 
@@ -272,16 +273,16 @@ namespace WordAssociations
             this.chainOptionRadioButton.UseVisualStyleBackColor = true;
             this.chainOptionRadioButton.CheckedChanged += new System.EventHandler(this.chainOptionRadioButton_CheckedChanged);
             // 
-            // instructionsButton
+            // SettingsButton
             // 
-            this.instructionsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
-            this.instructionsButton.Location = new System.Drawing.Point(12, 502);
-            this.instructionsButton.Name = "instructionsButton";
-            this.instructionsButton.Size = new System.Drawing.Size(178, 60);
-            this.instructionsButton.TabIndex = 14;
-            this.instructionsButton.Text = "Добавить инструкцию";
-            this.instructionsButton.UseVisualStyleBackColor = true;
-            this.instructionsButton.Click += new System.EventHandler(this.instructionsButton_Click);
+            this.SettingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.SettingsButton.Location = new System.Drawing.Point(25, 438);
+            this.SettingsButton.Name = "SettingsButton";
+            this.SettingsButton.Size = new System.Drawing.Size(178, 60);
+            this.SettingsButton.TabIndex = 14;
+            this.SettingsButton.Text = "Добавить настройку";
+            this.SettingsButton.UseVisualStyleBackColor = true;
+            this.SettingsButton.Click += new System.EventHandler(this.instructionsButton_Click);
             // 
             // openFileDialog
             // 
@@ -295,22 +296,35 @@ namespace WordAssociations
             this.wordCountLabel.Size = new System.Drawing.Size(299, 33);
             this.wordCountLabel.TabIndex = 15;
             // 
+            // addInstructionButton
+            // 
+            this.addInstructionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.addInstructionButton.Location = new System.Drawing.Point(25, 524);
+            this.addInstructionButton.Name = "addInstructionButton";
+            this.addInstructionButton.Size = new System.Drawing.Size(177, 57);
+            this.addInstructionButton.TabIndex = 16;
+            this.addInstructionButton.Text = "Добавить инструкцию";
+            this.addInstructionButton.UseVisualStyleBackColor = true;
+            this.addInstructionButton.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1009, 608);
+            this.Controls.Add(this.addInstructionButton);
             this.Controls.Add(this.wordCountLabel);
-            this.Controls.Add(this.instructionsButton);
+            this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.workOptionGroupBox);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.testeeGroupBox);
             this.Controls.Add(this.addAssocTextBox);
-            this.Controls.Add(this.associationLabel);
+            this.Controls.Add(this.InstructionLabel);
             this.Controls.Add(this.outputWordTextBox);
             this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(595, 406);
+            this.MaximumSize = new System.Drawing.Size(1025, 647);
+            this.MinimumSize = new System.Drawing.Size(1025, 647);
             this.Name = "MainForm";
             this.Text = "Word Associations";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -323,11 +337,13 @@ namespace WordAssociations
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.Button addInstructionButton;
+
         private System.Windows.Forms.Label wordCountLabel;
 
         private System.Windows.Forms.OpenFileDialog openFileDialog;
 
-        private System.Windows.Forms.Button instructionsButton;
+        private System.Windows.Forms.Button SettingsButton;
 
         private System.Windows.Forms.ComboBox genderComboBox;
 
@@ -358,7 +374,7 @@ namespace WordAssociations
 
         private System.Windows.Forms.TextBox addAssocTextBox;
 
-        private System.Windows.Forms.Label associationLabel;
+        private System.Windows.Forms.Label InstructionLabel;
         private System.Windows.Forms.TextBox outputWordTextBox;
 
         #endregion

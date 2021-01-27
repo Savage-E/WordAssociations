@@ -11,15 +11,18 @@ namespace WordAssociations
     public partial class MainForm : Form
     {
         private string[] testeeData;
-
         private string[,] associations;
         private bool isStarted;
         private bool isUserAdded;
-        private string[] instructions;
+        private string[] setttings;
         private int amount;
         private int count;
         private int chainNumber;
         private int currentIndex;
+        private int ind;
+        private int index;
+
+        private string[] instruction;
 
         public MainForm()
         {
@@ -42,20 +45,39 @@ namespace WordAssociations
             else
             {
                 addTesteeButton.Enabled = false;
-                instructionsButton.Enabled = false;
+                SettingsButton.Enabled = false;
                 startButton.Enabled = false;
                 workOptionGroupBox.Enabled = false;
+                addInstructionButton.Enabled = false;
                 isStarted = true;
                 addAssocTextBox.Enabled = true;
                 chainOptionRadioButton.Enabled = false;
                 singleOptionRadioButton.Enabled = false;
-                outputWordTextBox.Text = instructions[1];
+                if (chainOptionRadioButton.Checked)
+                {
+                    outputWordTextBox.Text = setttings[1];
+
+                    amount = int.Parse(setttings[0].Split(' ')[1]);
+
+                    chainNumber = int.Parse(setttings[0].Split(' ')[0]);
+
+                    associations[0, 0] = setttings[1];
+                }
+                else
+                {
+                    chainNumber = int.Parse(setttings[ind].Split(' ')[0]);
+                    outputWordTextBox.Text = setttings[ind + 1];
+                    amount = int.Parse(setttings[ind].Split(' ')[1]);
+                    associations = new string[
+                        int.Parse(setttings[ind].Split(' ')[1]), index];
+
+                    associations[0, 0] = setttings[ind + 1];
+                }
+
+
                 count = 1;
-                amount = int.Parse(instructions[0].Split(' ')[1]);
                 currentIndex = 1;
-                chainNumber = int.Parse(instructions[0].Split(' ')[0]);
                 wordCountLabel.Text = 1 + " из " + amount + "  Цепочка номер: " + currentIndex;
-                associations[0, 0] = instructions[1];
             }
         }
 
@@ -105,9 +127,9 @@ namespace WordAssociations
 
                 if (addAssocTextBox.Text != "")
                 {
-                    if (count != amount)
+                    if (count <= amount)
                     {
-                        associations[currentIndex - 1, count - 1] = outputWordTextBox.Text;
+                        associations[count - 1, currentIndex - 1] = addAssocTextBox.Text;
 
                         count++;
                         if (count > amount)
@@ -126,7 +148,8 @@ namespace WordAssociations
 
                         addAssocTextBox.Text = "";
                     }
-                    else
+
+                    if (count > amount)
                     {
                         addAssocTextBox.Enabled = false;
                         stopButton.Enabled = true;
@@ -142,8 +165,22 @@ namespace WordAssociations
         {
             if (currentIndex - 1 == chainNumber)
             {
+                string[] tempArray;
                 MessageBox.Show("Тестирование завершено. Спасибо");
-                ResultWriter.writeData(testeeData, associations, instructions);
+
+                if (singleOptionRadioButton.Checked)
+                {
+                    tempArray = new string[chainNumber + 1];
+                    Array.Copy(setttings, ind, tempArray, 0, chainNumber + 1);
+                }
+
+                else
+                {
+                    tempArray = new string[chainNumber + 1];
+                    Array.Copy(setttings, 0, tempArray, 0, chainNumber + 1);
+                }
+
+                ResultWriter.writeData(testeeData, associations, tempArray);
                 Application.Exit();
             }
 
@@ -157,7 +194,15 @@ namespace WordAssociations
         private void NextWord()
         {
             addAssocTextBox.Enabled = true;
-            outputWordTextBox.Text = instructions[currentIndex];
+            if (chainOptionRadioButton.Checked)
+            {
+                outputWordTextBox.Text = setttings[currentIndex];
+            }
+            else
+            {
+                outputWordTextBox.Text = setttings[currentIndex + ind];
+            }
+
             count = 1;
 
             wordCountLabel.Text = count + " из " + amount + "  Цепочка номер: " + currentIndex;
@@ -171,9 +216,19 @@ namespace WordAssociations
                     return;
                 // получаем выбранный файл
                 string filename = openFileDialog.FileName;
-                instructions = InstructionLoader.LoadInstruction(filename, instructions);
-                associations = new string[int.Parse(instructions[0].Split(' ')[0]),
-                    int.Parse(instructions[0].Split(' ')[1])];
+                setttings = SettingsLoader.LoadInstruction(filename, setttings);
+                if (chainOptionRadioButton.Checked)
+                {
+                    associations = new string[
+                        int.Parse(setttings[0].Split(' ')[1]), int.Parse(setttings[0].Split(' ')[0])];
+                }
+
+                if (singleOptionRadioButton.Checked)
+                {
+                    int index = int.Parse(setttings[ind].Split(' ')[0]);
+                    associations = new string[
+                        int.Parse(setttings[index].Split(' ')[1]), index];
+                }
             }
             catch (Exception exception)
             {
@@ -185,17 +240,24 @@ namespace WordAssociations
         {
             try
             {
-                instructions = InstructionLoader.LoadInstruction("Resources/instruction_C.txt", instructions);
+                setttings = SettingsLoader.LoadInstruction("Resources/settings.txt", setttings);
             }
             catch (Exception exception)
             {
                 MessageBox.Show("Отсутствует файл с инструкцией, загрузите новый, нажав на соответствующую кнопку");
             }
 
+            try
+            {
+                instruction = InstructionLoader.LoadInst("Resources/instruction.txt");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Отсутствует загруженная инструкция, загрузите новый файл");
+            }
+
             testeeData = new string[5];
 
-            associations = new string[int.Parse(instructions[0].Split(' ')[0]),
-                int.Parse(instructions[0].Split(' ')[1])];
             isStarted = false;
             isUserAdded = false;
             outputWordTextBox.ReadOnly = false;
@@ -205,17 +267,85 @@ namespace WordAssociations
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            InstructionSaver.SaveInst(instructions);
+            if (setttings.Length != 0 )
+            {
+                SettingsSaver.SaveInst(setttings);
+            }
+
+            if (instruction.Length != 0  || instruction != null )
+            {
+                InstructionSaver.saveInst(instruction);
+            }
         }
 
         private void chainOptionRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             startButton.Enabled = true;
+            if (setttings == null)
+            {
+                MessageBox.Show("Загрузите файл с настройками!");
+            }
+            else
+            {
+                associations = new string[
+                    int.Parse(setttings[0].Split(' ')[1]), int.Parse(setttings[0].Split(' ')[0])];
+                InstructionLabel.Text = "";
+                if (instruction.Length != 0  || setttings != null)
+                {
+                    foreach (var data in instruction)
+                    {
+                        InstructionLabel.Text += data;
+                    }
+                }
+            }
         }
 
         private void singleOptionRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             startButton.Enabled = true;
+            if (setttings == null)
+            {
+                MessageBox.Show("Загрузите файл с настройками!");
+            }
+            else
+            {
+                InstructionLabel.Text = "";
+                if (instruction.Length != 0  || setttings != null)
+                {
+                    foreach (var data in instruction)
+                    {
+                        InstructionLabel.Text += data;
+                    }
+                }
+            ind = int.Parse(setttings[0].Split(' ')[0]) + 1;
+            index = int.Parse(setttings[ind].Split(' ')[0]);
+            associations = new string[
+                int.Parse(setttings[ind].Split(' ')[1]), index];
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.Cancel)
+                    return;
+                // получаем выбранный файл
+                string filename = openFileDialog.FileName;
+                instruction = InstructionLoader.LoadInst(filename);
+                if (instruction.Length != 0)
+                {
+                    InstructionLabel.Text = "";
+                    foreach (var data in instruction)
+                    {
+                        InstructionLabel.Text += data;
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                // ignored
+            }
         }
     }
 }

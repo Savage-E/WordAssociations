@@ -1,16 +1,16 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace WordAssociations
 {
-    public class InstructionLoader
+    public static class SettingsLoader
     {
-        public static string[] LoadInst(string filePath)
+        public static string[] LoadInstruction(string filePath, string[] instructions)
         {
-            string[] instructions;
             if (File.Exists(filePath))
             {
                 instructions = File.ReadAllLines(filePath);
-               
             }
             else
             {
@@ -19,6 +19,5 @@ namespace WordAssociations
 
             return instructions;
         }
-            
     }
 }
