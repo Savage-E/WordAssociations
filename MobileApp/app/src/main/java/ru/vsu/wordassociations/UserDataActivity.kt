@@ -13,8 +13,9 @@ class UserDataActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_data)
-        val settings = intent.getStringExtra("settings")
-        val instructions = intent.getStringExtra("instructions")
+
+        val settings = intent.getStringArrayListExtra("settings")
+        val instructions = intent.getStringArrayListExtra("instructions")
         val items = listOf("Мужской", "Женский")
         val itemsOption = listOf("Цепочка ассоциаций", "Звезда")
         val adapter = ArrayAdapter(this, R.layout.list_item, R.id.list_item, items)
@@ -24,9 +25,14 @@ class UserDataActivity : AppCompatActivity() {
 
         btn_submit_user_data.setOnClickListener {
             if (et_age.text.toString().isEmpty() || et_last_name.text.toString().isEmpty()
-                || et_name.text.toString().isEmpty() || tv_gender.text.toString().isEmpty()
+                || et_name.text.toString().isEmpty() || tv_gender.text.toString()
+                    .isEmpty() || tv_option.text.toString().isEmpty()
             ) {
-                Toast.makeText(this, "Введите Имя, Фамилию, пол и возраст!", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    this,
+                    "Введите Имя, Фамилию, пол, возраст и режим работы!",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             } else {
                 val dataList = ArrayList<String>()

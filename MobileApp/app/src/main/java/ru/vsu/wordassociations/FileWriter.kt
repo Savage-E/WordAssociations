@@ -7,7 +7,7 @@ import java.util.*
 
 class WordWriter {
 
-    fun write(dataList: ArrayList<String>, context: Context) {
+    fun writeRecord(dataList: ArrayList<String>, context: Context) {
 
 
         val fileName = "Record "  + Date().time.toString() + ".txt"
@@ -32,4 +32,7 @@ class WordWriter {
 
     }
 
+    fun writeSettings(){
+
+    }
 }

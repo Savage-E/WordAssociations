@@ -10,8 +10,8 @@ import kotlinx.android.synthetic.main.activity_settings.*
 class SettingsActivity : AppCompatActivity() {
     private val SETTINGS: Int = 1
     private val INSTRUCTION: Int = 2
-    private var settings = String()
-    private var instructions = String()
+    private var settings = ArrayList<String>()
+    private var instructions =  ArrayList<String>()
     private lateinit var uri: Uri
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,11 +57,11 @@ class SettingsActivity : AppCompatActivity() {
         when (code) {
             1 -> {
                 settings = fileLoader.loadExternalFile(uri, applicationContext)
-                Toast.makeText(this, settings, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, settings[0], Toast.LENGTH_SHORT).show()
             }
             2 -> {
                 instructions = fileLoader.loadExternalFile(uri, applicationContext)
-                Toast.makeText(this, instructions, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, instructions[0], Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -69,16 +69,11 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
-
-        val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-
+        val intent = Intent()
         intent.putExtra("instructions", instructions)
         intent.putExtra("settings", settings)
 
-        setResult(RESULT_OK, intent);
-        startActivityIfNeeded(intent, 0)
+        setResult(RESULT_OK, intent)
         finish()
     }
 }

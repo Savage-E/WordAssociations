@@ -10,14 +10,14 @@ import java.io.InputStreamReader
 
 class FileLoader {
 
-    fun loadExternalFile(uri: Uri, context: Context): String {
+    fun loadExternalFile(uri: Uri, context: Context): ArrayList<String> {
         var reader: BufferedReader? = null
-        val builder = StringBuilder()
+        val arrayList = ArrayList<String>()
         try {
             reader = BufferedReader(InputStreamReader(context.contentResolver.openInputStream(uri)))
             var line: String?
             while (reader.readLine().also { line = it } != null) {
-                builder.append(line)
+                line?.let { arrayList.add(it) }
             }
         } catch (e: IOException) {
             //
@@ -26,16 +26,16 @@ class FileLoader {
                 try {
                     reader.close()
                 } catch (e: IOException) {
-                  //
+                    //
                 }
             }
         }
-        return builder.toString()
+        return arrayList
 
     }
 
-    fun loadInternalFile(context: Context, option: Int): String {
-        val sb = java.lang.StringBuilder()
+    fun loadInternalFile(context: Context, option: Int): ArrayList<String> {
+        val arrayList = ArrayList<String>()
         try {
             val fis: FileInputStream = if (option == 1) {
                 context.openFileInput("instruction.txt")
@@ -47,13 +47,14 @@ class FileLoader {
 
             var line: String?
             while (bufferedReader.readLine().also { line = it } != null) {
-                sb.append(line)
+                line?.let { arrayList.add(it) }
             }
 
         } catch (ex: Exception) {
-//ignored
+                //ignored
         }
 
-        return sb.toString()
+
+        return arrayList
     }
 }

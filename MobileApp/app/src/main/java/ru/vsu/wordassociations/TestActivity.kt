@@ -8,15 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_test.*
 
 
-
 class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
         val intent = intent
         val option = intent.getStringExtra("option")
-
+        val instruction = intent.getStringArrayListExtra("instructions")
         val dataList = intent.getStringArrayListExtra("dataList")
+        textField_instruction.text = instruction.toString()
         txtField_word.text = "Word1"
         btn_submit_word.setOnClickListener()
         {
@@ -45,7 +45,7 @@ class TestActivity : AppCompatActivity() {
 
                 val fileWriter = WordWriter()
                 if (dataList != null) {
-                    fileWriter.write(dataList, applicationContext)
+                    fileWriter.writeRecord(dataList, applicationContext)
                 }
                 finish()
             }
@@ -60,7 +60,7 @@ class TestActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 val fileWriter = WordWriter()
                 if (dataList != null) {
-                    fileWriter.write(dataList, applicationContext)
+                    fileWriter.writeRecord(dataList, applicationContext)
                 }
                 startActivity(intent)
                 finish()

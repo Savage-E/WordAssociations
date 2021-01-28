@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private var instructions = String()
-    private var settings = String()
+    private var instructions = ArrayList<String>()
+    private var settings = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         initializeSettings()
 
         btn_start.setOnClickListener() {
-            if (instructions == "null" || settings == "null") {
+            if (instructions.isEmpty() || settings.isEmpty()) {
                 Toast.makeText(
                     this,
                     "Отутствуют настройка и инструкция, добавьте их, нажав на кнопку Настройка",
@@ -32,23 +32,54 @@ class MainActivity : AppCompatActivity() {
         }
         btn_settings.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
+
+            startActivityForResult(intent, 111)
+
 
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 111 && resultCode
+            == RESULT_OK
+        ) {
+            val b = data?.extras
+            if (b != null) {
+                val tempArray = b.getStringArrayList("settings") as ArrayList<String>
+                if (tempArray.isNotEmpty()) {
+                    settings = tempArray
+                }
+            } else {
+                Toast.makeText(
+                    this,
+                    "Ошибка чтения файла с настройками",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
 
-        settings = intent.getStringExtra("settings").toString()
-        instructions = intent . getStringExtra ("instructions").toString()
+            if (b != null) {
+                val tempArray = b.getStringArrayList("instructions") as ArrayList<String>
+                if (tempArray.isNotEmpty()) {
+                    instructions = tempArray
+                }
+
+            } else {
+                Toast.makeText(
+                    this,
+                    "Ошибка чтения файла с инструкцией",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
     }
 
 
     private fun initializeSettings() {
         val fileLoader = FileLoader()
+        instructions = fileLoader.loadInternalFile(applicationContext, 1)
         settings = fileLoader.loadInternalFile(applicationContext, 2)
-        instructions = fileLoader.loadInternalFile(applicationContext, 2)
 
     }
 
