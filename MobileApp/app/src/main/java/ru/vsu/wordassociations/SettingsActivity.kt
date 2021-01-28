@@ -3,33 +3,32 @@ package ru.vsu.wordassociations
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingsActivity : AppCompatActivity() {
-    val SETTINGS: Int = 1
-    val INSTRUCTION: Int = 1
-    var settings = String()
-    var instructions = String()
-    lateinit var uri: Uri
+    private val SETTINGS: Int = 1
+    private val INSTRUCTION: Int = 2
+    private var settings = String()
+    private var instructions = String()
+    private lateinit var uri: Uri
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
 
-        btn_load_settings.setOnClickListener() { view: View? ->
+        btn_load_settings.setOnClickListener {
             val intent = Intent()
-            intent.setType("text/plain")
-            intent.setAction(Intent.ACTION_GET_CONTENT)
+            intent.type = "text/plain"
+            intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(Intent.createChooser(intent, "Select Instruction"), SETTINGS)
         }
 
-        btn_load_instruction.setOnClickListener() { view: View? ->
+        btn_load_instruction.setOnClickListener() {
             val intent = Intent()
-            intent.setType("text/plain")
-            intent.setAction(Intent.ACTION_GET_CONTENT)
+            intent.type = "text/plain"
+            intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(Intent.createChooser(intent, "Select Instruction"), INSTRUCTION)
         }
 
@@ -56,16 +55,30 @@ class SettingsActivity : AppCompatActivity() {
     private fun upload(code: Int) {
         val fileLoader = FileLoader()
         when (code) {
-            SETTINGS -> {
-                settings = fileLoader.loadFile(uri, applicationContext)
+            1 -> {
+                settings = fileLoader.loadExternalFile(uri, applicationContext)
                 Toast.makeText(this, settings, Toast.LENGTH_SHORT).show()
             }
-            INSTRUCTION -> {
-                instructions = fileLoader.loadFile(uri, applicationContext)
+            2 -> {
+                instructions = fileLoader.loadExternalFile(uri, applicationContext)
                 Toast.makeText(this, instructions, Toast.LENGTH_SHORT).show()
             }
         }
 
 
+    }
+
+    override fun onBackPressed() {
+
+
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+
+        intent.putExtra("instructions", instructions)
+        intent.putExtra("settings", settings)
+
+        setResult(RESULT_OK, intent);
+        startActivityIfNeeded(intent, 0)
+        finish()
     }
 }

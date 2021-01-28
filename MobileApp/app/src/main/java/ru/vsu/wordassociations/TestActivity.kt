@@ -23,7 +23,7 @@ class TestActivity : AppCompatActivity() {
 
 
             if (et_word.text.toString() == "") {
-                Toast.makeText(this, "Введите ассоциацию!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Введите ассоциацию!", Toast.LENGTH_LONG).show()
             } else {
                 if (option.equals("Звезда")) {
 

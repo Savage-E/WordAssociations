@@ -5,12 +5,12 @@ import java.io.File
 import java.util.*
 
 
-public class WordWriter {
+class WordWriter {
 
     fun write(dataList: ArrayList<String>, context: Context) {
 
 
-        var fileName = "Record "  + Date().time.toString() + ".txt"
+        val fileName = "Record "  + Date().time.toString() + ".txt"
 
 
         val path = context.getExternalFilesDir(null)

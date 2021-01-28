@@ -13,21 +13,23 @@ class UserDataActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_data)
+        val settings = intent.getStringExtra("settings")
+        val instructions = intent.getStringExtra("instructions")
         val items = listOf("Мужской", "Женский")
         val itemsOption = listOf("Цепочка ассоциаций", "Звезда")
         val adapter = ArrayAdapter(this, R.layout.list_item, R.id.list_item, items)
         (txtField_gender.editText as? AutoCompleteTextView)?.setAdapter(adapter)
-        val adapter2 = ArrayAdapter(this, R.layout.list_item, R.id.list_item, items)
+        val adapter2 = ArrayAdapter(this, R.layout.list_item, R.id.list_item, itemsOption)
         (txtField_option.editText as? AutoCompleteTextView)?.setAdapter(adapter2)
 
-        btn_submit_user_data.setOnClickListener() {
+        btn_submit_user_data.setOnClickListener {
             if (et_age.text.toString().isEmpty() || et_last_name.text.toString().isEmpty()
                 || et_name.text.toString().isEmpty() || tv_gender.text.toString().isEmpty()
             ) {
                 Toast.makeText(this, "Введите Имя, Фамилию, пол и возраст!", Toast.LENGTH_SHORT)
                     .show()
             } else {
-                var dataList = ArrayList<String>()
+                val dataList = ArrayList<String>()
                 dataList.add(et_name.text.toString())
                 dataList.add(et_last_name.text.toString())
                 dataList.add(et_patronymic.text.toString())
@@ -37,7 +39,10 @@ class UserDataActivity : AppCompatActivity() {
 
                 val intent = Intent(this, TestActivity::class.java)
                 intent.putExtra("dataList", dataList)
-                intent.putExtra("option",tv_option.text.toString())
+                intent.putExtra("option", tv_option.text.toString())
+                intent.putExtra("instructions", settings)
+                intent.putExtra("settings", instructions)
+
                 startActivity(intent)
                 finish()
             }
