@@ -17,10 +17,7 @@
             android:name=".TestActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".TestOptionsActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"

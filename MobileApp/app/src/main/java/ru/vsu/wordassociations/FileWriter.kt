@@ -1,11 +1,8 @@
 package ru.vsu.wordassociations
 
 import android.content.Context
-import android.os.Environment
 import java.io.File
-import java.io.FileOutputStream
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 public class WordWriter {
@@ -13,13 +10,8 @@ public class WordWriter {
     fun write(dataList: ArrayList<String>, context: Context) {
 
 
-        var fileName = ""
-        if (dataList.get(6).equals("Цепочка ассоциаций")) {
-            fileName = "Record" + "_chain" + "_" + Date().time.toString() + ".txt"
-        } else {
-            fileName = "Record" + "_single" + "_" + Date().time.toBigDecimal()  + ".txt"
+        var fileName = "Record "  + Date().time.toString() + ".txt"
 
-        }
 
         val path = context.getExternalFilesDir(null)
         val letDirectory = File(path, "Records")
@@ -27,15 +19,15 @@ public class WordWriter {
         val file = File(letDirectory, fileName)
 
 
-        file.appendText(dataList.get(0) + " ")
-        file.appendText(dataList.get(1) + " ")
-        file.appendText(dataList.get(2) + " ")
-        file.appendText(dataList.get(3) + " ")
-        file.appendText(dataList.get(5) + " ")
-        file.appendText(dataList.get(4) + " ")
+        file.appendText(dataList[0] + " ")
+        file.appendText(dataList[1] + " ")
+        file.appendText(dataList[2] + " ")
+        file.appendText(dataList[3] + " ")
+        file.appendText(dataList[5] + " ")
+        file.appendText(dataList[4] + " ")
 
-        for (i in 7..dataList.size-1) {
-            file.appendText("\n" + dataList.get(i))
+        for (i in 7 until dataList.size) {
+            file.appendText("\n" + dataList[i])
         }
 
     }

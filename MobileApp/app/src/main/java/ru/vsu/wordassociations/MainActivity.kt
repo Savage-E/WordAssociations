@@ -18,6 +18,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        btn_settings.setOnClickListener(){
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+
+        }
     }
 
 }
