@@ -9,14 +9,24 @@ import kotlinx.android.synthetic.main.activity_test.*
 
 
 class TestActivity : AppCompatActivity() {
+    var settings = ArrayList<String>()
+    var instructions = ArrayList<String>()
+    var dataList = ArrayList<String>()
+    var option = String()
+    var chainNumber = 0
+    var count = 0
+    var currentIndex = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
         val intent = intent
-        val option = intent.getStringExtra("option")
-        val instruction = intent.getStringArrayListExtra("instructions")
-        val dataList = intent.getStringArrayListExtra("dataList")
-        textField_instruction.text = instruction.toString()
+        option = intent.getStringExtra("option").toString()
+        instructions = intent.getStringArrayListExtra("instructions") as ArrayList<String>
+        dataList = intent.getStringArrayListExtra("dataList") as ArrayList<String>
+        settings = intent.getStringArrayListExtra("settings") as ArrayList<String>
+
+      //  textField_instruction.text = instruction.toString()
+
         txtField_word.text = "Word1"
         btn_submit_word.setOnClickListener()
         {
@@ -25,7 +35,7 @@ class TestActivity : AppCompatActivity() {
             if (et_word.text.toString() == "") {
                 Toast.makeText(this, "Введите ассоциацию!", Toast.LENGTH_LONG).show()
             } else {
-                if (option.equals("Звезда")) {
+                if (option == "Звезда") {
 
                     dataList?.add(et_word.text.toString())
                 } else {
@@ -35,6 +45,7 @@ class TestActivity : AppCompatActivity() {
                 et_word.text?.clear()
             }
         }
+
         btn_finish.setOnClickListener() {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Внимание!")
@@ -66,6 +77,13 @@ class TestActivity : AppCompatActivity() {
                 finish()
             }
             builder.show()
+        }
+        fun initializeValues() {
+            if (option == "Звезда") {
+
+            } else {
+
+            }
         }
     }
 }

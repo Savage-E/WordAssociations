@@ -26,7 +26,7 @@ class FileLoader {
                 try {
                     reader.close()
                 } catch (e: IOException) {
-                    //
+                    // ignored
                 }
             }
         }
@@ -51,7 +51,7 @@ class FileLoader {
             }
 
         } catch (ex: Exception) {
-                //ignored
+            //ignored
         }
 
 

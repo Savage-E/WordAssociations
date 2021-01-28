@@ -11,7 +11,7 @@ class SettingsActivity : AppCompatActivity() {
     private val SETTINGS: Int = 1
     private val INSTRUCTION: Int = 2
     private var settings = ArrayList<String>()
-    private var instructions =  ArrayList<String>()
+    private var instructions = ArrayList<String>()
     private lateinit var uri: Uri
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +22,7 @@ class SettingsActivity : AppCompatActivity() {
             val intent = Intent()
             intent.type = "text/plain"
             intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Instruction"), SETTINGS)
+            startActivityForResult(Intent.createChooser(intent, "Select settings"), SETTINGS)
         }
 
         btn_load_instruction.setOnClickListener() {
