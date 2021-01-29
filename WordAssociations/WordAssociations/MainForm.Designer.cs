@@ -33,7 +33,6 @@ namespace WordAssociations
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.outputWordTextBox = new System.Windows.Forms.TextBox();
-            this.InstructionLabel = new System.Windows.Forms.Label();
             this.addAssocTextBox = new System.Windows.Forms.TextBox();
             this.testeeGroupBox = new System.Windows.Forms.GroupBox();
             this.genderComboBox = new System.Windows.Forms.ComboBox();
@@ -57,6 +56,7 @@ namespace WordAssociations
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.wordCountLabel = new System.Windows.Forms.Label();
             this.addInstructionButton = new System.Windows.Forms.Button();
+            this.instuctionRichTextBox = new System.Windows.Forms.RichTextBox();
             this.testeeGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.ageNumericUpDown)).BeginInit();
             this.workOptionGroupBox.SuspendLayout();
@@ -72,17 +72,6 @@ namespace WordAssociations
             this.outputWordTextBox.Name = "outputWordTextBox";
             this.outputWordTextBox.Size = new System.Drawing.Size(310, 32);
             this.outputWordTextBox.TabIndex = 3;
-            // 
-            // InstructionLabel
-            // 
-            this.InstructionLabel.BackColor = System.Drawing.SystemColors.Info;
-            this.InstructionLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.InstructionLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.InstructionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
-            this.InstructionLabel.Location = new System.Drawing.Point(299, 25);
-            this.InstructionLabel.Name = "InstructionLabel";
-            this.InstructionLabel.Size = new System.Drawing.Size(310, 251);
-            this.InstructionLabel.TabIndex = 4;
             // 
             // addAssocTextBox
             // 
@@ -307,11 +296,23 @@ namespace WordAssociations
             this.addInstructionButton.UseVisualStyleBackColor = true;
             this.addInstructionButton.Click += new System.EventHandler(this.button1_Click);
             // 
+            // instuctionRichTextBox
+            // 
+            this.instuctionRichTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.instuctionRichTextBox.BackColor = System.Drawing.SystemColors.Info;
+            this.instuctionRichTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.instuctionRichTextBox.Location = new System.Drawing.Point(299, 12);
+            this.instuctionRichTextBox.Name = "instuctionRichTextBox";
+            this.instuctionRichTextBox.Size = new System.Drawing.Size(311, 255);
+            this.instuctionRichTextBox.TabIndex = 17;
+            this.instuctionRichTextBox.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1009, 608);
+            this.Controls.Add(this.instuctionRichTextBox);
             this.Controls.Add(this.addInstructionButton);
             this.Controls.Add(this.wordCountLabel);
             this.Controls.Add(this.SettingsButton);
@@ -320,7 +321,6 @@ namespace WordAssociations
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.testeeGroupBox);
             this.Controls.Add(this.addAssocTextBox);
-            this.Controls.Add(this.InstructionLabel);
             this.Controls.Add(this.outputWordTextBox);
             this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1025, 647);
@@ -336,6 +336,8 @@ namespace WordAssociations
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.RichTextBox instuctionRichTextBox;
 
         private System.Windows.Forms.Button addInstructionButton;
 
@@ -374,7 +376,6 @@ namespace WordAssociations
 
         private System.Windows.Forms.TextBox addAssocTextBox;
 
-        private System.Windows.Forms.Label InstructionLabel;
         private System.Windows.Forms.TextBox outputWordTextBox;
 
         #endregion

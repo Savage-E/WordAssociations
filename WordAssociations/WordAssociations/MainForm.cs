@@ -136,9 +136,16 @@ namespace WordAssociations
                         associations[count - 1, currentIndex - 1] = addAssocTextBox.Text;
 
                         count++;
+
                         if (count > amount)
+                        {
                             wordCountLabel.Text = count - 1 + " из " + amount + "  Цепочка номер: " + currentIndex +
                                                   " из " + chainNumber;
+                            addAssocTextBox.Enabled = false;
+                            stopButton.Enabled = true;
+                            addAssocTextBox.Text = "";
+                            stopButton.Text = "Завершить " + currentIndex++ + " цепочку";
+                        }
                         else
                         {
                             wordCountLabel.Text = count + " из " + amount + "  Цепочка номер: " + currentIndex +
@@ -154,14 +161,6 @@ namespace WordAssociations
 
                         addAssocTextBox.Text = "";
                     }
-
-                    if (count > amount)
-                    {
-                        addAssocTextBox.Enabled = false;
-                        stopButton.Enabled = true;
-                        addAssocTextBox.Text = "";
-                        stopButton.Text = "Завершить " + currentIndex++ + " цепочку";
-                    }
                 }
             }
         }
@@ -176,12 +175,14 @@ namespace WordAssociations
 
                 if (singleOptionRadioButton.Checked)
                 {
+                    //Выделяем базовые слова из настроек .
                     tempArray = new string[chainNumber + 1];
                     Array.Copy(setttings, ind, tempArray, 0, chainNumber + 1);
                 }
 
                 else
                 {
+                    //Выделяем базовые слова из настроек.
                     tempArray = new string[chainNumber + 1];
                     Array.Copy(setttings, 0, tempArray, 0, chainNumber + 1);
                 }
@@ -197,6 +198,7 @@ namespace WordAssociations
             }
         }
 
+        //Переход к следующей цепочке.
         private void NextWord()
         {
             addAssocTextBox.Enabled = true;
@@ -262,8 +264,8 @@ namespace WordAssociations
                 MessageBox.Show("Отсутствует загруженная инструкция, загрузите новый файл");
             }
 
+            //Деактивируем элементы.
             testeeData = new string[5];
-
             isStarted = false;
             isUserAdded = false;
             outputWordTextBox.ReadOnly = false;
@@ -295,12 +297,12 @@ namespace WordAssociations
             {
                 associations = new string[
                     int.Parse(setttings[0].Split(' ')[1]), int.Parse(setttings[0].Split(' ')[0])];
-                InstructionLabel.Text = "";
+                instuctionRichTextBox.Text = "";
                 if (instruction.Length != 0 || setttings != null)
                 {
                     foreach (var data in instruction)
                     {
-                        InstructionLabel.Text += data;
+                        instuctionRichTextBox.Text += data;
                     }
                 }
             }
@@ -315,15 +317,16 @@ namespace WordAssociations
             }
             else
             {
-                InstructionLabel.Text = "";
+                instuctionRichTextBox.Text = "";
                 if (instruction.Length != 0 || setttings != null)
                 {
                     foreach (var data in instruction)
                     {
-                        InstructionLabel.Text += data;
+                        instuctionRichTextBox.Text += data;
                     }
                 }
 
+                //Получаем значения для режима Звезда.
                 ind = int.Parse(setttings[0].Split(' ')[0]) + 1;
                 index = int.Parse(setttings[ind].Split(' ')[0]);
                 associations = new string[
@@ -339,13 +342,15 @@ namespace WordAssociations
                     return;
                 // получаем выбранный файл
                 string filename = openFileDialog.FileName;
+                //Загружаем его в переменную.
                 instruction = InstructionLoader.LoadInst(filename);
+                //Заполняем текстбокс.
                 if (instruction.Length != 0)
                 {
-                    InstructionLabel.Text = "";
+                    instuctionRichTextBox.Text = "";
                     foreach (var data in instruction)
                     {
-                        InstructionLabel.Text += data;
+                        instuctionRichTextBox.Text += data;
                     }
                 }
             }
