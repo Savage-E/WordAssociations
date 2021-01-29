@@ -26,7 +26,7 @@ class UserDataActivity : AppCompatActivity() {
         btn_submit_user_data.setOnClickListener {
             if (et_age.text.toString().isEmpty() || et_last_name.text.toString().isEmpty()
                 || et_name.text.toString().isEmpty() || tv_gender.text.toString()
-                    .isEmpty() || tv_option.text.toString().isEmpty()
+                    .isEmpty() || tv_option.text.toString().isEmpty() || et_patronymic.toString().isEmpty()
             ) {
                 Toast.makeText(
                     this,
@@ -56,9 +56,9 @@ class UserDataActivity : AppCompatActivity() {
 
 
     }
-
+    //Деактивируем кнопку назад.
     override fun onBackPressed() {
         super.onBackPressed()
-        Toast.makeText(this, "кнопка назад отключена", Toast.LENGTH_SHORT)
+        Toast.makeText(this, "Кнопка назад отключена", Toast.LENGTH_SHORT)
     }
 }

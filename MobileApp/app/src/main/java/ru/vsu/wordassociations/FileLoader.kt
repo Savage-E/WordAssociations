@@ -2,7 +2,10 @@ package ru.vsu.wordassociations
 
 import android.content.Context
 import android.net.Uri
-import java.io.*
+import java.io.BufferedReader
+import java.io.File
+import java.io.IOException
+import java.io.InputStreamReader
 
 
 class FileLoader {
@@ -33,35 +36,41 @@ class FileLoader {
 
     fun loadSavedSettings(context: Context, option: Int): ArrayList<String> {
         val arrayList = ArrayList<String>()
-
-
+        var reader: BufferedReader? = null
         val path = context.getExternalFilesDir(null)
+
         val letDirectory = File(path, "Settings")
-        var file :File
-        letDirectory.mkdirs()
-        if (option == 1) {
-            file = File(letDirectory, "Settings.txt")
+        val file: File
+        file = if (option == 1) {
+            File(letDirectory, "instructions.txt")
         } else {
-            file = File(letDirectory, "instructions.txt")
+            File(letDirectory, "Settings.txt")
         }
-
-
-        val fis: FileInputStream
+        letDirectory.mkdirs()
         try {
-
-            fis = context.openFileInput(file.toString())
-
-            val isr = InputStreamReader(fis)
-            val bufferedReader = BufferedReader(isr)
-
+            reader = BufferedReader(
+                InputStreamReader(
+                    context.contentResolver.openInputStream(
+                        Uri.fromFile(file)
+                    )
+                )
+            )
             var line: String?
-            while (bufferedReader.readLine().also { line = it } != null) {
+            while (reader.readLine().also { line = it } != null) {
                 line?.let { arrayList.add(it) }
             }
-
-        } catch (ex: Exception) {
-            //ignored
+        } catch (e: IOException) {
+            //
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close()
+                } catch (e: IOException) {
+                    // ignored
+                }
+            }
         }
+
         arrayList.trimToSize()
 
 

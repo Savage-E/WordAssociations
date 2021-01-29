@@ -105,7 +105,7 @@ class TestActivity : AppCompatActivity() {
         count = 1
 
     }
-
+    //Cохраняем настройки и инструкцию.
     @RequiresApi(Build.VERSION_CODES.O)
     private fun saveData() {
         val tempArray = ArrayList<String>()
@@ -167,7 +167,7 @@ class TestActivity : AppCompatActivity() {
 
         btn_finish.isEnabled = false
     }
-
+    //Деактивируем кнопку назад.
     override fun onBackPressed() {
         super.onBackPressed()
         //Отключение кнопки назад.

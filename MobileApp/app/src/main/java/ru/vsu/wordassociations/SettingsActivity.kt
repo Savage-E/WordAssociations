@@ -3,7 +3,6 @@ package ru.vsu.wordassociations
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 
@@ -51,23 +50,23 @@ class SettingsActivity : AppCompatActivity() {
 
         super.onActivityResult(requestCode, resultCode, data)
     }
-
+    //Загружаем выбранные в файл менджере файлы в наши переменные настроек и инструкции.
     private fun upload(code: Int) {
         val fileLoader = FileLoader()
         when (code) {
             1 -> {
                 settings = fileLoader.loadFiles(uri, applicationContext)
-                Toast.makeText(this, settings[0], Toast.LENGTH_SHORT).show()
+
             }
             2 -> {
                 instructions = fileLoader.loadFiles(uri, applicationContext)
-                Toast.makeText(this, instructions[0], Toast.LENGTH_SHORT).show()
+
             }
         }
 
 
     }
-
+    //Передаем данные при нажатии кнопки назад.
     override fun onBackPressed() {
         val intent = Intent()
         intent.putExtra("instructions", instructions)
