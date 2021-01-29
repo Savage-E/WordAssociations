@@ -25,7 +25,7 @@ class SettingsActivity : AppCompatActivity() {
             startActivityForResult(Intent.createChooser(intent, "Select settings"), SETTINGS)
         }
 
-        btn_load_instruction.setOnClickListener() {
+        btn_load_instruction.setOnClickListener {
             val intent = Intent()
             intent.type = "text/plain"
             intent.action = Intent.ACTION_GET_CONTENT
@@ -56,11 +56,11 @@ class SettingsActivity : AppCompatActivity() {
         val fileLoader = FileLoader()
         when (code) {
             1 -> {
-                settings = fileLoader.loadExternalFile(uri, applicationContext)
+                settings = fileLoader.loadFiles(uri, applicationContext)
                 Toast.makeText(this, settings[0], Toast.LENGTH_SHORT).show()
             }
             2 -> {
-                instructions = fileLoader.loadExternalFile(uri, applicationContext)
+                instructions = fileLoader.loadFiles(uri, applicationContext)
                 Toast.makeText(this, instructions[0], Toast.LENGTH_SHORT).show()
             }
         }

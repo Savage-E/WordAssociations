@@ -46,13 +46,19 @@ class UserDataActivity : AppCompatActivity() {
                 val intent = Intent(this, TestActivity::class.java)
                 intent.putExtra("dataList", dataList)
                 intent.putExtra("option", tv_option.text.toString())
-                intent.putExtra("instructions", settings)
-                intent.putExtra("settings", instructions)
+                intent.putExtra("instructions", instructions)
+                intent.putExtra("settings", settings)
 
                 startActivity(intent)
                 finish()
             }
         }
 
+
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Toast.makeText(this, "кнопка назад отключена", Toast.LENGTH_SHORT)
     }
 }

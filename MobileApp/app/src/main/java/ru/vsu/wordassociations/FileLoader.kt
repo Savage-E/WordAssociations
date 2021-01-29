@@ -2,15 +2,12 @@ package ru.vsu.wordassociations
 
 import android.content.Context
 import android.net.Uri
-import java.io.BufferedReader
-import java.io.FileInputStream
-import java.io.IOException
-import java.io.InputStreamReader
+import java.io.*
 
 
 class FileLoader {
 
-    fun loadExternalFile(uri: Uri, context: Context): ArrayList<String> {
+    fun loadFiles(uri: Uri, context: Context): ArrayList<String> {
         var reader: BufferedReader? = null
         val arrayList = ArrayList<String>()
         try {
@@ -34,14 +31,26 @@ class FileLoader {
 
     }
 
-    fun loadInternalFile(context: Context, option: Int): ArrayList<String> {
+    fun loadSavedSettings(context: Context, option: Int): ArrayList<String> {
         val arrayList = ArrayList<String>()
+
+
+        val path = context.getExternalFilesDir(null)
+        val letDirectory = File(path, "Settings")
+        var file :File
+        letDirectory.mkdirs()
+        if (option == 1) {
+            file = File(letDirectory, "Settings.txt")
+        } else {
+            file = File(letDirectory, "instructions.txt")
+        }
+
+
+        val fis: FileInputStream
         try {
-            val fis: FileInputStream = if (option == 1) {
-                context.openFileInput("instruction.txt")
-            } else {
-                context.openFileInput("settings.txt")
-            }
+
+            fis = context.openFileInput(file.toString())
+
             val isr = InputStreamReader(fis)
             val bufferedReader = BufferedReader(isr)
 
@@ -53,6 +62,7 @@ class FileLoader {
         } catch (ex: Exception) {
             //ignored
         }
+        arrayList.trimToSize()
 
 
         return arrayList

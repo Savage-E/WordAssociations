@@ -14,8 +14,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initializeSettings()
-
-        btn_start.setOnClickListener() {
+        //val set = TempFileWriter()
+      //  set.writeSettings(applicationContext)
+        btn_start.setOnClickListener {
             if (instructions.isEmpty() || settings.isEmpty()) {
                 Toast.makeText(
                     this,
@@ -78,8 +79,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializeSettings() {
         val fileLoader = FileLoader()
-        instructions = fileLoader.loadInternalFile(applicationContext, 1)
-        settings = fileLoader.loadInternalFile(applicationContext, 2)
+        instructions = fileLoader.loadSavedSettings(applicationContext, 1)
+        settings = fileLoader.loadSavedSettings(applicationContext, 2)
 
     }
 
