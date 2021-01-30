@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_bg"
-    android:gravity="center"
+    android:gravity="bottom"
     android:orientation="vertical"
     tools:context=".TestActivity">
 
 
     <ScrollView
         android:id="@+id/SCROLLER_ID"
-        android:layout_width="360dp"
-        android:layout_height="290dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="400sp"
+        android:layout_marginTop="20sp"
         android:fillViewport="true"
         android:scrollbars="vertical">
 
@@ -22,6 +22,11 @@
             android:id="@+id/txtField_instruction"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_gravity="bottom|center_vertical"
+            android:layout_marginTop="100sp"
+
+            android:layout_marginBottom="10sp"
+            android:layout_weight="3"
             android:background="@color/beige"
             android:gravity="top"
             android:textColor="@color/black"
@@ -31,20 +36,25 @@
 
     <TextView
         android:id="@+id/txtField_word_count"
-        android:layout_width="360dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="20sp"
+        android:layout_height="30sp"
+        android:layout_weight="0"
         android:background="@color/beige"
         android:gravity="center"
+        android:textAlignment="center"
         android:textColor="@color/black"
+
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/txtField_word"
-        android:layout_width="360dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
         android:layout_marginTop="20dp"
+        android:layout_weight="0"
         android:background="@color/beige"
+        android:layout_marginHorizontal="10sp"
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="25sp" />
@@ -52,38 +62,46 @@
 
     <com.google.android.material.textfield.TextInputLayout
 
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="10dp"
         android:layout_marginTop="20dp"
+        android:layout_weight="0"
         android:gravity="center"
         android:hint="Ваша ассоциация"
-
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_word"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_weight="0"
             android:textSize="18sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_submit_word"
-        android:layout_width="320dp"
-        android:layout_height="70dp"
-        android:text="Добавить" />
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
+        android:layout_marginHorizontal="30sp"
+        android:layout_marginVertical="10sp"
+
+        android:layout_weight="0"
+        android:text="Добавить"
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/btn_finish"
-        android:layout_width="360dp"
-        android:layout_height="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginHorizontal="10sp"
+        android:layout_marginTop="50sp"
+        android:layout_marginBottom="10sp"
         android:gravity="bottom|center"
-        android:paddingBottom="19dp"
+        android:paddingBottom="19sp"
         android:text="Завершить"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="15sp" />
 </LinearLayout>

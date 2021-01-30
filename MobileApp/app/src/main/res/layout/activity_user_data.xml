@@ -116,8 +116,10 @@
         <Button
             android:id="@+id/btn_submit_user_data"
             android:layout_width="320dp"
-            android:layout_height="100dp"
-            android:text="Далее" />
+            android:layout_height="100sp"
+            android:text="Далее"
+            android:textSize="20sp"
+            />
     </LinearLayout>
 
 

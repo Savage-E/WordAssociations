@@ -10,13 +10,20 @@
 
     <Button
         android:id="@+id/btn_start"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="Начать" />
+        android:text="Начать"
+        android:layout_marginHorizontal="30sp"
+        android:layout_weight="0"
+        android:textSize="17sp"/>
 
     <Button
         android:id="@+id/btn_settings"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="Настройка" />
+        android:text="Настройка"
+        android:layout_marginTop="30dp"
+        android:textSize="17sp"
+        android:layout_marginHorizontal="30sp"
+        android:layout_weight="0"/>
 </LinearLayout>
